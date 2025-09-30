@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos Eléctricos: Tablero y Compensación</title>
+    <title>Proyecto Eléctrico: Reforma de Tablero</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -67,7 +67,6 @@
             font-weight: bold;
         }
         
-        /* Estilos de la Vista Principal */
         .project-selection-card {
             cursor: pointer;
             overflow: hidden;
@@ -105,13 +104,6 @@
         
         .content-section { display: none; }
         
-        /* --- Power Factor Simulator --- */
-        #power-triangle { transition: all 0.5s ease-in-out; }
-        .sim-value-change { transition: all 0.5s ease-in-out; }
-        .penalty-value {
-            transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
-        }
-
         /* Toggle Switch */
         .toggle-checkbox:checked + .toggle-label { background-color: var(--green-400); }
         .toggle-checkbox:checked + .toggle-label .toggle-ball { transform: translateX(100%); }
@@ -121,19 +113,10 @@
         .image-modal-content { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
         .clickable-image { cursor: pointer; transition: filter 0.3s ease; }
         .clickable-image:hover { filter: brightness(1.2); }
-        .map-hotspot { position: absolute; width:40px; height:40px; background-color: rgba(56, 189, 248, 0.4); border: 2px solid var(--sky-400); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(2px); animation: pulse 2s infinite; }
-        .map-hotspot:hover { background-color: rgba(56, 189, 248, 0.7); transform: scale(1.2); animation-play-state: paused; }
-        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); } }
         .dashboard-display { background-color: #1a242f; border-radius: 8px; padding: 1rem; text-align: center; border: 1px solid #4a5568; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
         .dashboard-label { font-size: 0.8rem; color: var(--sky-400); text-transform: uppercase; }
         .dashboard-value { font-size: 2.5rem; font-weight: bold; color: white; line-height: 1; }
         .status-indicator { display: inline-block; width: 1rem; height: 1rem; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle; }
-        .sim-tab { cursor: pointer; padding: 0.5rem 1rem; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
-        .sim-tab.active { color: var(--sky-400); border-bottom-color: var(--sky-400); }
-        .sim-tab.disabled { color: var(--gray-500); cursor: not-allowed; }
-        .sim-tab-content { display: none; }
-        .sim-tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
     </style>
 </head>
@@ -141,18 +124,18 @@
 
     <header class="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <h1 id="main-title" class="text-xl md:text-2xl font-bold text-sky-400" style="font-family: 'Teko', sans-serif;">PROYECTOS TÉCNICOS 2025</h1>
+            <h1 id="main-title" class="text-xl md:text-2xl font-bold text-sky-400" style="font-family: 'Teko', sans-serif;">PROYECTO TÉCNICO 2025</h1>
             <div id="controls-container" class="flex items-center space-x-4">
                  <button id="back-to-main-menu" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition hidden" title="Volver al Menú Principal">
-                    <i class="fas fa-th-large text-lg"></i>
-                </button>
-                <button id="play-presentation-btn" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition hidden" title="Modo Presentación">
-                    <i id="play-icon" class="fas fa-play text-lg"></i>
-                    <i id="stop-icon" class="fas fa-stop text-lg hidden"></i>
-                </button>
-                <button id="fullscreen-btn" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition" title="Pantalla Completa">
-                    <i class="fas fa-expand text-lg"></i>
-                </button>
+                     <i class="fas fa-th-large text-lg"></i>
+                 </button>
+                 <button id="play-presentation-btn" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition hidden" title="Modo Presentación">
+                     <i id="play-icon" class="fas fa-play text-lg"></i>
+                     <i id="stop-icon" class="fas fa-stop text-lg hidden"></i>
+                 </button>
+                 <button id="fullscreen-btn" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition" title="Pantalla Completa">
+                     <i class="fas fa-expand text-lg"></i>
+                 </button>
             </div>
         </nav>
     </header>
@@ -163,85 +146,75 @@
 
     <main class="container mx-auto px-6 py-8">
         
-        <!-- SECCIÓN 0: INTRODUCCIÓN Y SELECCIÓN DE PROYECTO -->
         <section id="main-intro-section">
              <div class="text-center">
-                <h1 class="section-title">Proyectos de Mejora Eléctrica</h1>
-                <p class="text-xl text-slate-300 mt-2">Una presentación interactiva de los trabajos realizados.</p>
-            </div>
-            <div class="grid lg:grid-cols-2 gap-12 items-start mt-12">
-                <div>
-                    <div class="prose prose-invert max-w-none text-slate-300 mb-8">
-                        <h3 class="text-sky-400 text-2xl" style="font-family: 'Teko', sans-serif;">Introducción General</h3>
-                        <p>Estos proyectos representan un esfuerzo integral para mejorar la infraestructura eléctrica de nuestra institución, abordando tanto la seguridad y capacidad de las instalaciones como la eficiencia energética y el ahorro económico.</p>
-                         <p>Seleccione un proyecto para explorar sus fases y resultados.</p>
-                    </div>
+                 <h1 class="section-title">Proyecto de Mejora Eléctrica</h1>
+                 <p class="text-xl text-slate-300 mt-2">Una presentación interactiva del trabajo realizado.</p>
+             </div>
+             <div class="grid lg:grid-cols-2 gap-12 items-center mt-12 max-w-5xl mx-auto">
+                 <div>
+                     <div class="prose prose-invert max-w-none text-slate-300 mb-8">
+                         <h3 class="text-sky-400 text-2xl" style="font-family: 'Teko', sans-serif;">Introducción General</h3>
+                         <p>Este proyecto representa un esfuerzo integral para mejorar la infraestructura eléctrica de nuestra institución.</p>
+                         <p>Se abordan la seguridad, capacidad y eficiencia de las instalaciones para cumplir con la normativa vigente.</p>
+                         <p class="mt-4">Haga clic en el proyecto para explorar sus fases y resultados.</p>
+                     </div>
 
-                    <div class="card p-6">
-                         <h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Protagonistas de los Proyectos</h3>
-                         <div class="grid grid-cols-2 gap-6 mt-4">
-                             <div>
-                                 <h4 class="font-bold text-white mb-2">Proyecto Tablero</h4>
-                                 <ul id="student-list-tablero" class="text-sm text-slate-300 space-y-1"></ul>
-                             </div>
-                             <div>
-                                 <h4 class="font-bold text-white mb-2">Proyecto Compensación</h4>
-                                 <ul id="student-list-compensacion" class="text-sm text-slate-300 space-y-1"></ul>
-                             </div>
-                         </div>
-                         <hr class="border-slate-600 my-4">
-                         <div class="flex justify-center items-center space-x-8">
-                            <img src="https://13dejulio.edu.ar/wp-content/uploads/2022/03/Isologotipo-13-de-Julio-400.png" alt="Logo instituto" class="h-10">
+                     <div class="card p-6">
+                           <h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Protagonistas del Proyecto</h3>
+                           <div class="mt-4">
+                               <div>
+                                   <h4 class="font-bold text-white mb-2 text-center">Equipo de Trabajo</h4>
+                                   <ul id="student-list-tablero" class="text-sm text-slate-300 space-y-1 text-center"></ul>
+                               </div>
+                           </div>
+                           <hr class="border-slate-600 my-4">
+                           <div class="flex justify-center items-center space-x-8">
+                             <img src="https://13dejulio.edu.ar/wp-content/uploads/2022/03/Isologotipo-13-de-Julio-400.png" alt="Logo Instituto" class="h-10">
                              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Edesur_logo22.png" alt="Logo Edesur" class="h-10">
-                         </div>
-                    </div>
-                </div>
-                 <div class="space-y-8">
-                    <div id="select-project-tablero" class="card project-selection-card">
-                        <div class="text-center"><i class="fas fa-tasks text-5xl text-sky-400 mb-4"></i><h2 class="project-title">Reforma de Tablero Seccional</h2><p class="text-slate-400">Enfoque en Seguridad, Capacidad y Cumplimiento Normativo.</p></div>
-                    </div>
-                    <div id="select-project-compensacion" class="card project-selection-card">
-                         <div class="text-center"><i class="fas fa-chart-line text-5xl text-green-400 mb-4"></i><h2 class="project-title">Compensación de Potencia Reactiva</h2><p class="text-slate-400">Enfoque en Eficiencia Energética, Diagnóstico y Ahorro.</p></div>
-                    </div>
+                           </div>
+                     </div>
                  </div>
-            </div>
+                  <div class="space-y-8 flex flex-col justify-center">
+                      <div id="select-project-tablero" class="card project-selection-card">
+                          <div class="text-center"><i class="fas fa-tasks text-5xl text-sky-400 mb-4"></i><h2 class="project-title">Reforma de Tablero Seccional</h2><p class="text-slate-400">Enfoque en Seguridad, Capacidad y Cumplimiento Normativo.</p></div>
+                      </div>
+                   </div>
+             </div>
         </section>
 
         <!-- CONTENEDOR PROYECTO 1: TABLERO -->
         <div id="project-container-tablero" class="hidden">
             <section class="overview-section mb-16">
                 <div class="text-center"><h1 class="section-title">Reforma y Adecuación de Tablero Seccional</h1><p class="text-2xl text-slate-300 mt-2" style="font-family: 'Teko', sans-serif;">Garantizando Seguridad y Funcionalidad bajo Normativa AEA 90364</p></div>
-                 <div class="card p-4 mt-12"><h2 class="font-bold text-2xl text-center mb-4" style="font-family: 'Teko', sans-serif;">Fases del Proyecto</h2><div id="full-timeline-tablero" class="full-timeline-container py-0"></div></div>
+                
+                <div class="card mt-12">
+                    <h3 class="card-title"><i class="fas fa-info-circle mr-2"></i>Problema, Marco y Objetivo</h3>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="prose prose-invert text-slate-300">
+                            <p><strong>Problema:</strong> El tablero eléctrico del 2° piso incumple normativas vigentes, es poco funcional y representa un riesgo para la seguridad.</p>
+                            <p><strong>Marco:</strong> Este tablero alimenta áreas críticas: 4 laboratorios, biblioteca, planta de biodiesel y sala audiovisual.</p>
+                             <p class="mt-4"><strong>Objetivo:</strong> Reformar integralmente el tablero para adecuarlo a la normativa, garantizar la seguridad, mejorar su funcionalidad y dejar una mejora duradera en la institución.</p>
+                        </div>
+                        <img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero Seccional" alt="Tablero eléctrico antiguo con cables desordenados">
+                    </div>
+                </div>
+
+                 <div class="card p-4 mt-8"><h2 class="font-bold text-2xl text-center mb-4" style="font-family: 'Teko', sans-serif;">Fases del Proyecto</h2><div id="full-timeline-tablero" class="full-timeline-container py-0"></div></div>
             </section>
             <hr class="border-slate-700 my-16">
             <div class="content-container">
-                <section data-step-id="intro" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-info-circle mr-2"></i>Planteamiento del Problema</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>El proyecto surge al detectar que el tablero eléctrico seccional del segundo piso presenta serias deficiencias: no cumple con las normativas vigentes de la AEA y es poco funcional.</p><p>Este tablero es crítico, distribuyendo energía a <strong>4 laboratorios, biblioteca, planta de biodiesel y sala audiovisual.</strong> El estado actual representa un riesgo para la seguridad.</p></div><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero Seccional"></div></div></section>
-                <section data-step-id="contingencia" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-exclamation-triangle mr-2"></i>Plan de Contingencia</h3><div class="prose prose-invert text-slate-300"><p>Para minimizar la interrupción de actividades, se diseñó un plan para garantizar la continuidad del suministro a áreas esenciales.</p><ul class="list-disc list-inside space-y-3 mt-4"><li><strong class="text-white">Alimentación Temporal:</strong> Se proveyó energía a áreas críticas desde líneas temporales seguras.</li><li><strong class="text-white">Seguridad y Control:</strong> Se usaron tableros provisionales con protecciones adecuadas y se señalizó la zona.</li></ul><img src="https://placehold.co/600x400/1e293b/facc15?text=Foto+Tablero+Provisional" class="mt-4 rounded-lg shadow-lg clickable-image" data-title="Tablero Provisional Utilizado en la Contingencia"></div></div></section>
-                <section data-step-id="planos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-map-location-dot mr-2"></i>Relevamiento y Planos</h3><p class="text-center text-gray-400 mb-6">Haz clic en los puntos para ver los sectores relevados.</p><div class="relative max-w-4xl mx-auto"><img src="https://i.imgur.com/7vjQJ3c.png" alt="Plano del 2do Piso" class="rounded-lg w-full"><div class="map-hotspot" style="top: 45%; left: 25%;" data-modal-title="Sector Laboratorios" data-modal-img="https://placehold.co/600x400/1e293b/38bdf8?text=Foto+Instalación+Laboratorio"></div><div class="map-hotspot" style="top: 45%; left: 70%;" data-modal-title="Sector Biblioteca" data-modal-img="https://placehold.co/600x400/1e293b/38bdf8?text=Foto+Instalación+Biblioteca"></div></div></div></section>
-                <section data-step-id="unifilar" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-project-diagram mr-2"></i>Diagrama Unifilar</h3><p class="text-gray-400 mb-6">Esquema del nuevo tablero, diseñado para una correcta distribución y protección.</p><div class="relative"><img src="https://i.imgur.com/0Q8r7Zz.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Diagrama Unifilar del Nuevo Tablero"></div></div></section>
-                <section data-step-id="ejecucion" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Ejecución y Componentes Clave</h3><div class="grid md:grid-cols-2 gap-8 items-center"><img src="https://placehold.co/500x350/1e293b/ffffff?text=Diagrama+de+Gantt" class="rounded-lg shadow-lg clickable-image" data-title="Planificación de Tareas"><div class="prose prose-invert text-slate-300"><p>La ejecución se organizó con un <strong>Diagrama de Gantt</strong> para gestionar tareas y plazos.</p><div class="mt-4 bg-slate-700 p-4 rounded-lg"><h4 class="font-bold text-white">Componentes Destacados</h4><ul class="text-sm text-gray-300 list-none p-0 mt-2 space-y-2"><li><i class="fas fa-memory mr-2 text-sky-400"></i><strong>Bornera:</strong> Schneider NSYTRV162</li><li><i class="fas fa-plug mr-2 text-sky-400"></i><strong>Peine de Conexión:</strong> Schneider A9XPCM04</li></ul></div></div></div></div></section>
-                <section data-step-id="economia" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Análisis Económico</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div></div></section>
-                <section data-step-id="simulador" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard de Diagnóstico y Comparación</h3><div class="border-b border-slate-700 mb-4"><nav id="sim-tabs-tablero" class="flex space-x-4" aria-label="Tabs"><a href="#" class="sim-tab active" data-tab="1">1. Diagnóstico</a><a href="#" class="sim-tab disabled" data-tab="2">2. La Mejora</a><a href="#" class="sim-tab disabled" data-tab="3">3. Resultados</a></nav></div><div id="sim-tab-content-tablero-1" class="sim-tab-content active"><p class="text-gray-400 mb-6">Simulación del <strong>sistema antiguo</strong>. Active las cargas para ver cómo responde el tablero original.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls-antiguo" class="space-y-4"></div><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="dashboard-display"><div class="dashboard-label">Corriente Total</div><div id="current-display-antiguo" class="dashboard-value">0.0 <span class="text-lg">A</span></div></div><div class="dashboard-display"><div class="dashboard-label">Potencia Total</div><div id="power-display-antiguo" class="dashboard-value">0.0 <span class="text-lg">kW</span></div></div></div><div id="old-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero ANTIGUO</h4><div class="flex items-center"><span id="old-board-indicator" class="status-indicator bg-green-400"></span><span id="old-board-text" class="font-bold">OK</span></div><p id="old-board-desc" class="text-sm text-gray-400 mt-2">Límite estimado: 25A. El sistema opera dentro de los límites.</p></div></div></div></div><div id="sim-tab-content-tablero-2" class="sim-tab-content"><div class="text-center p-4"><h3 class="text-2xl font-bold text-sky-400 mb-4">La Solución: Un Tablero Moderno y Normativo</h3><p class="text-gray-300 max-w-3xl mx-auto mb-6">El nuevo tablero fue diseñado con componentes de mayor capacidad y seguridad, cumpliendo con la normativa AEA.</p><div class="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto"><div class="bg-slate-700 p-4 rounded-lg text-left"><h4 class="font-bold text-white"><i class="fas fa-shield-alt mr-2 text-green-400"></i>Interruptor Principal</h4><p class="text-sm text-gray-300">Termomagnético 4x63A para una capacidad adecuada.</p></div><div class="bg-slate-700 p-4 rounded-lg text-left"><h4 class="font-bold text-white"><i class="fas fa-bolt mr-2 text-yellow-400"></i>Protección Diferencial</h4><p class="text-sm text-gray-300">Diferencial 4P 63A 100mA para protección contra contactos indirectos.</p></div></div></div></div><div id="sim-tab-content-tablero-3" class="sim-tab-content"><p class="text-gray-400 mb-6">Simule la misma carga con el <strong>sistema nuevo</strong> y observe su comportamiento.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls-nuevo" class="space-y-4"></div><div class="space-y-4"><div class="relative sine-wave-bg w-full h-24 overflow-hidden mb-4"><img src="https://i.imgur.com/s6Jv8Z4.gif" alt="Ondas senoidales trifásicas" class="w-full h-full object-cover"></div><div id="new-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero NUEVO</h4><div class="flex items-center"><span id="new-board-indicator" class="status-indicator bg-green-400"></span><span id="new-board-text" class="font-bold">SEGURO Y NORMATIVO</span></div><p id="new-board-desc" class="text-sm text-gray-400 mt-2">Límite: 63A. El tablero opera con amplio margen de seguridad.</p></div></div></div></div></div></section>
-                <section data-step-id="conclusion" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusión y Resultados</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>Esta reforma deja en nuestra institución una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><img src="https://i.imgur.com/uN12N88.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></section>
-                <section data-step-id="agradecimientos" class="mb-12 content-section"><div class="card text-center"><h3 class="card-title"><i class="fas fa-hands-helping mr-2"></i>Agradecimientos</h3><div class="prose prose-invert max-w-2xl mx-auto text-slate-300"><p>Agradecemos a <strong>Edesur</strong> por la invaluable oportunidad de mentoría, y a nuestros <strong>profesores y al Instituto</strong> por la confianza y el apoyo constante.</p></div></div></section>
+                <section data-step-id="relevamiento" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-search-location mr-2"></i>Relevamiento Inicial</h3><p class="text-slate-300 mb-6">Se relevó la instalación para comprender la distribución de cargas y documentar el estado original con fotos y el diagrama unifilar preexistente.</p><div class="grid lg:grid-cols-2 gap-8 items-start"><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Diagrama Unifilar Original</h4><img src="https://i.imgur.com/0Q8r7Zz.jpg" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama Unifilar Preexistente"></div><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Estado del Tablero</h4><div class="grid grid-cols-2 gap-4"><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Foto 1 del Tablero Antiguo"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Foto+Adicional+Tablero" class="rounded-lg shadow-lg clickable-image" data-title="Foto 2 del Tablero Antiguo"></div></div></div></div></section>
+                <section data-step-id="organizacion" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tasks mr-2"></i>Gantt y Organización</h3><p class="text-slate-300 mb-6">La ejecución se planificó con un Diagrama de Gantt para gestionar tareas, plazos y recursos de manera eficiente.</p><img src="https://i.imgur.com/mU4P2Z4.png" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama de Gantt del Proyecto"></div></section>
+                <section data-step-id="planos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-drafting-compass mr-2"></i>Planos del Proyecto</h3><div class="grid md:grid-cols-3 gap-6 mt-6 text-center"><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Plano de Planta</h4><p class="text-sm text-slate-400 flex-grow mb-4">Diseño en AutoCAD de la distribución.</p><img src="https://i.imgur.com/7vjQJ3c.png" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Plano de Planta (AutoCAD)"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Modelo 3D</h4><p class="text-sm text-slate-400 flex-grow mb-4">Visualización tridimensional del tablero.</p><img src="https://placehold.co/400x300/1e293b/ffffff?text=Modelo+3D" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Modelo 3D del Tablero"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Unifilar Nuevo</h4><p class="text-sm text-slate-400 flex-grow mb-4">Esquema final de la instalación.</p><img src="https://i.imgur.com/9x6Bo3Z.jpg" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Diagrama Unifilar Nuevo"></div></div></div></section>
+                <section data-step-id="presupuesto" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Presupuesto</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div></div></section>
+                <section data-step-id="contingencia" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-exclamation-triangle mr-2"></i>Plan de Contingencia</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>Se diseñó un plan para minimizar la interrupción de actividades y garantizar la continuidad del suministro a áreas esenciales.</p><ul class="list-disc list-inside space-y-3 mt-4"><li><strong class="text-white">Alimentación Temporal:</strong> Se proveyó energía a áreas críticas desde líneas temporales seguras.</li><li><strong class="text-white">Seguridad y Control:</strong> Se usaron tableros provisionales con protecciones adecuadas.</li></ul></div><img src="https://placehold.co/600x400/1e293b/facc15?text=Foto+Tablero+Provisional" class="mt-4 rounded-lg shadow-lg clickable-image" data-title="Tablero Provisional Utilizado" alt="Tablero eléctrico provisional de obra"></div></section>
+                <section data-step-id="montaje" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje</h3><p class="text-slate-300 mb-6">El montaje se realizó siguiendo el diseño planificado, utilizando componentes normalizados para garantizar la calidad y seguridad de la nueva instalación.</p><div class="grid md:grid-cols-2 gap-8 items-center"><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">ANTES</h4><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero"></div><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">DESPUÉS</h4><img src="https://i.imgur.com/uN12N88.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></div></section>
+                <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><div class="card bg-slate-900/50"><h3 class="card-title"><i class="fas fa-tachometer-alt mr-2"></i>Simulador de Carga</h3><div><p class="text-gray-400 mb-6">Compare el comportamiento del tablero antiguo vs. el nuevo ante la misma demanda de carga.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls" class="space-y-4"></div><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="dashboard-display"><div class="dashboard-label">Corriente Total</div><div id="current-display" class="dashboard-value">0.0 <span class="text-lg">A</span></div></div><div class="dashboard-display"><div class="dashboard-label">Potencia Total</div><div id="power-display" class="dashboard-value">0.0 <span class="text-lg">kW</span></div></div></div><div id="old-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero ANTIGUO</h4><div class="flex items-center"><span id="old-board-indicator" class="status-indicator bg-green-400"></span><span id="old-board-text" class="font-bold">OK</span></div><p id="old-board-desc" class="text-sm text-gray-400 mt-2">Límite: 25A. El sistema opera dentro de los límites.</p></div><div id="new-board-status" class="bg-slate-900 p-4 mt-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero NUEVO</h4><div class="flex items-center"><span id="new-board-indicator" class="status-indicator bg-green-400"></span><span id="new-board-text" class="font-bold">SEGURO</span></div><p id="new-board-desc" class="text-sm text-gray-400 mt-2">Límite: 63A. Opera con amplio margen de seguridad.</p></div></div></div></div></div></div></section>
+                <section data-step-id="quienes-somos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Quiénes Somos</h3><div id="team-container" class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mt-6"></div></div></section>
             </div>
         </div>
 
-        <!-- CONTENEDOR PROYECTO 2: COMPENSACIÓN -->
-        <div id="project-container-compensacion" class="hidden">
-            <section class="overview-section mb-16">
-                 <div class="text-center"><h1 class="section-title">Compensación de Potencia Reactiva</h1><p class="text-2xl text-slate-300 mt-2" style="font-family: 'Teko', sans-serif;">Análisis de Eficiencia Energética y Propuesta de Mejora</p></div>
-                 <div class="card p-4 mt-12"><h2 class="font-bold text-2xl text-center mb-4" style="font-family: 'Teko', sans-serif;">Fases del Proyecto</h2><div id="full-timeline-compensacion" class="full-timeline-container py-0"></div></div>
-            </section>
-            <hr class="border-slate-700 my-16">
-            <div class="content-container">
-                 <section data-step-id="problema-reactiva" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-bolt mr-2"></i>El Problema: Energía Reactiva</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>La energía reactiva no produce trabajo útil pero sobrecarga la red. Un bajo factor de potencia (cos φ) indica un exceso de energía reactiva, resultando en penalizaciones económicas.</p><p>Las mediciones de EDESUR revelaron un factor de potencia de hasta <strong>0.78</strong>, muy por debajo del <strong>0.95</strong> reglamentario.</p></div><img src="https://i.imgur.com/w23U24h.png" alt="Triángulo de potencias" class="rounded-lg clickable-image" data-title="Triángulo de Potencias (P, Q, S)"></div></div></section>
-                <section data-step-id="analisis-reactiva" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-bar mr-2"></i>Análisis y Medición</h3><div class="grid md:grid-cols-2 gap-8 items-center"><img src="https://i.imgur.com/qg4S3Yh.png" alt="Powermate" class="rounded-lg clickable-image" data-title="Herramienta de Medición: Powermeter"><div class="prose prose-invert text-slate-300"><p>Se utilizó un <strong>Power Meter</strong> para medir los consumos. Los datos, junto con los registros de EDESUR, permitieron cuantificar el problema y su correlación con el consumo de los talleres.</p></div></div><div class="grid md:grid-cols-2 gap-4 mt-4"><img src="https://i.imgur.com/L7EAEr8.png" alt="Gráfico de Potencia Activa" class="rounded-lg clickable-image" data-title="Medición de Potencia Activa (kW)"><img src="https://i.imgur.com/g8R4a0S.png" alt="Gráfico de Potencia Reactiva" class="rounded-lg clickable-image" data-title="Medición de Potencia Reactiva (kVAr)"></div></div></section>
-                <section data-step-id="solucion-reactiva" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-lightbulb mr-2"></i>La Solución: Banco de Capacitores</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>La solución para compensar la energía reactiva es la instalación de un <strong>banco de capacitores</strong>, que genera energía reactiva opuesta para "cancelar" la inductiva.</p><p>El resultado es un aumento del factor de potencia por encima de 0.95, eliminando penalizaciones y mejorando la eficiencia general.</p></div><img src="https://placehold.co/500x300/1e293b/38bdf8?text=Banco+de+Capacitores" class="rounded-lg clickable-image" data-title="Banco de Capacitores Industrial"></div></div></section>
-                <section data-step-id="simulador-reactiva" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-toggle-on mr-2"></i>Simulador de Corrección del Factor de Potencia</h3><div class="grid lg:grid-cols-2 gap-8 items-center"><div class="space-y-4"><div class="dashboard-display"><div class="dashboard-label">Factor de Potencia (cos φ)</div><div id="fp-value" class="dashboard-value sim-value-change">0.78</div></div><div class="dashboard-display"><div class="dashboard-label">Penalización Mensual Estimada</div><div id="penalty-value" class="dashboard-value penalty-value text-red-500" style="text-shadow: 0 0 8px var(--red-500);">$ 85,450</div></div><div class="flex items-center justify-center bg-slate-700 p-3 rounded-lg"><span class="mr-3">Activar Banco de Capacitores</span><div class="relative inline-block w-10 mr-2 align-middle select-none"><input type="checkbox" id="capacitor-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/><label for="capacitor-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label></div></div></div><div class="relative w-full max-w-sm mx-auto aspect-square"><svg id="power-triangle" viewBox="0 0 100 100"><polygon points="5,95 95,95 95,15" fill="rgba(30,41,59,0.5)" stroke="white" stroke-width="1"/><text x="45" y="90" fill="white" font-size="5">P (kW)</text><text x="80" y="55" fill="var(--red-500)" font-size="5" transform="rotate(-90, 98, 55)">Q (kVAr)</text><text x="45" y="50" fill="var(--yellow-400)" font-size="5" transform="rotate(-53, 50, 50)">S (kVA)</text></svg></div></div></div></section>
-                <section data-step-id="conclusion-reactiva" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusión y Próximos Pasos</h3><div class="prose prose-invert text-slate-300"><p>El análisis confirma la necesidad de instalar un banco de capacitores para corregir el bajo factor de potencia, eliminar las multas y mejorar la eficiencia.</p><p>Los próximos pasos incluyen gestionar el acceso a los medidores restantes para un dimensionamiento final y proceder con la instalación.</p></div></div></section>
-            </div>
-        </div>
     </main>
 
     <div id="presentation-nav" class="hidden"><div id="presentation-nav-prev" class="fixed left-4 top-1/2 -translate-y-1/2 z-50"><button class="p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full shadow-lg hover:bg-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"><i class="fas fa-chevron-left text-2xl text-white"></i></button></div><div id="presentation-nav-next" class="fixed right-4 top-1/2 -translate-y-1/2 z-50"><button class="p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full shadow-lg hover:bg-slate-700 transition"><i class="fas fa-chevron-right text-2xl text-white"></i></button></div></div>
@@ -253,28 +226,22 @@
             tablero: {
                 title: 'Proyecto: Reforma de Tablero',
                 steps: [
-                    { id: 'intro', title: 'Planteo del Problema', icon: 'fa-info-circle' },
-                    { id: 'contingencia', title: 'Plan de Contingencia', icon: 'fa-exclamation-triangle' },
-                    { id: 'planos', title: 'Relevamiento y Planos', icon: 'fa-map-location-dot' },
-                    { id: 'unifilar', title: 'Diagrama Unifilar', icon: 'fa-project-diagram'},
-                    { id: 'ejecucion', title: 'Ejecución y Componentes', icon: 'fa-tools' },
-                    { id: 'economia', title: 'Análisis Económico', icon: 'fa-chart-pie' },
-                    { id: 'simulador', title: 'Simulador de Carga', icon: 'fa-tachometer-alt' },
-                    { id: 'conclusion', title: 'Conclusión', icon: 'fa-check-circle' },
-                    { id: 'agradecimientos', title: 'Agradecimientos', icon: 'fa-hands-helping' }
+                    { id: 'relevamiento', title: '1. Relevamiento', icon: 'fa-search-location' },
+                    { id: 'organizacion', title: '2. Gantt y Organización', icon: 'fa-tasks' },
+                    { id: 'planos', title: '3. Planos', icon: 'fa-drafting-compass' },
+                    { id: 'presupuesto', title: '4. Presupuesto', icon: 'fa-chart-pie' },
+                    { id: 'contingencia', title: '5. Plan de Contingencia', icon: 'fa-exclamation-triangle' },
+                    { id: 'montaje', title: '6. Montaje', icon: 'fa-tools' },
+                    { id: 'conclusiones', title: '7. Conclusiones', icon: 'fa-check-circle' },
+                    { id: 'quienes-somos', title: '8. Quiénes Somos', icon: 'fa-users' }
                 ],
-                students: ['Zelada', 'Batallanes', 'Roman']
-            },
-            compensacion: {
-                title: 'Proyecto: Compensación Reactiva',
-                steps: [
-                    { id: 'problema-reactiva', title: 'Problema: Energía Reactiva', icon: 'fa-bolt' },
-                    { id: 'analisis-reactiva', title: 'Análisis y Medición', icon: 'fa-chart-bar' },
-                    { id: 'solucion-reactiva', title: 'La Solución: Banco de Capacitores', icon: 'fa-lightbulb' },
-                    { id: 'simulador-reactiva', title: 'Simulador de Corrección', icon: 'fa-toggle-on' },
-                    { id: 'conclusion-reactiva', title: 'Conclusión y Próximos Pasos', icon: 'fa-check-circle' }
-                ],
-                students: ['Argüello', 'Espinola', 'Cordero']
+                students: [
+                    { name: 'Paloma', photo: 'https://placehold.co/150x150/1e293b/ffffff?text=P', qr: 'https://placehold.co/100x100/ffffff/0f172a?text=QR' },
+                    { name: 'Jesus', photo: 'https://placehold.co/150x150/1e293b/ffffff?text=J', qr: 'https://placehold.co/100x100/ffffff/0f172a?text=QR' },
+                    { name: 'Espinola', photo: 'https://placehold.co/150x150/1e293b/ffffff?text=E', qr: 'https://placehold.co/100x100/ffffff/0f172a?text=QR' },
+                    { name: 'Zelada', photo: 'https://placehold.co/150x150/1e293b/ffffff?text=Z', qr: 'https://placehold.co/100x100/ffffff/0f172a?text=QR' },
+                    { name: 'Batallanes', photo: 'https://placehold.co/150x150/1e293b/ffffff?text=B', qr: 'https://placehold.co/100x100/ffffff/0f172a?text=QR' }
+                ]
             }
         };
 
@@ -287,7 +254,6 @@
         const mainIntroSection = document.getElementById('main-intro-section');
         const projectContainers = {
             tablero: document.getElementById('project-container-tablero'),
-            compensacion: document.getElementById('project-container-compensacion')
         };
         const controls = {
             backToMenu: document.getElementById('back-to-main-menu'),
@@ -306,7 +272,7 @@
             Object.values(projectContainers).forEach(c => c.style.display = 'none');
             if (viewName === 'main') {
                 mainIntroSection.style.display = 'block';
-                mainTitle.textContent = 'PROYECTOS TÉCNICOS 2025';
+                mainTitle.textContent = 'PROYECTO TÉCNICO 2025';
                 controls.backToMenu.classList.add('hidden');
                 controls.playBtn.classList.add('hidden');
             } else {
@@ -322,8 +288,22 @@
             activeStepIndex = -1;
             maxUnlockedStep = 0;
             isPresentationMode = false;
+            buildTeamSection();
             showView(projectName);
             updateAllNavs();
+        }
+        
+        function buildTeamSection() {
+            const teamContainer = document.getElementById('team-container');
+            const students = projects.tablero.students;
+            teamContainer.innerHTML = students.map(student => `
+                <div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center text-center">
+                    <img src="${student.photo}" alt="Foto de ${student.name}" class="w-32 h-32 rounded-full mb-4 border-2 border-sky-400 object-cover">
+                    <h4 class="text-xl font-bold text-white">${student.name}</h4>
+                    <a href="#" class="text-sky-400 hover:text-sky-300 transition my-2"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <img src="${student.qr}" alt="QR de ${student.name}" class="w-24 h-24 rounded-md mt-2">
+                </div>
+            `).join('');
         }
 
         function backToMainMenu() {
@@ -463,8 +443,8 @@
             modal.classList.add('opacity-0');
             setTimeout(() => modal.classList.add('hidden'), 300);
         };
-        document.querySelectorAll('.clickable-image, .map-hotspot').forEach(el => {
-            el.addEventListener('click', (e) => openModal(e.currentTarget.dataset.title || e.currentTarget.dataset.modalTitle, e.currentTarget.src || e.currentTarget.dataset.modalImg));
+        document.querySelectorAll('.clickable-image').forEach(el => {
+            el.addEventListener('click', (e) => openModal(e.currentTarget.dataset.title, e.currentTarget.src));
         });
         document.getElementById('modal-close-btn').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
@@ -479,37 +459,11 @@
             }
         });
         
-        document.getElementById('student-list-tablero').innerHTML = projects.tablero.students.map(name => `<li>${name}</li>`).join('');
-        document.getElementById('student-list-compensacion').innerHTML = projects.compensacion.students.map(name => `<li>${name}</li>`).join('');
+        document.getElementById('student-list-tablero').innerHTML = projects.tablero.students.map(s => `<li>${s.name}</li>`).join('');
         
         document.getElementById('select-project-tablero').addEventListener('click', () => selectProject('tablero'));
-        document.getElementById('select-project-compensacion').addEventListener('click', () => selectProject('compensacion'));
         controls.backToMenu.addEventListener('click', backToMainMenu);
         
-        const capacitorToggle = document.getElementById('capacitor-toggle');
-        const fpValue = document.getElementById('fp-value');
-        const penaltyValue = document.getElementById('penalty-value');
-        const powerTriangle = document.getElementById('power-triangle').querySelector('polygon');
-
-        capacitorToggle.addEventListener('change', () => {
-            if (capacitorToggle.checked) {
-                fpValue.textContent = '0.96';
-                penaltyValue.textContent = '$ 0';
-                penaltyValue.classList.remove('text-red-500');
-                penaltyValue.classList.add('text-green-400');
-                penaltyValue.style.textShadow = '0 0 8px var(--green-400)';
-                powerTriangle.setAttribute('points', '5,95 95,95 95,85');
-            } else {
-                fpValue.textContent = '0.78';
-                penaltyValue.textContent = '$ 85,450';
-                penaltyValue.classList.add('text-red-500');
-                penaltyValue.classList.remove('text-green-400');
-                penaltyValue.style.textShadow = '0 0 8px var(--red-500)';
-                powerTriangle.setAttribute('points', '5,95 95,95 95,15');
-            }
-        });
-
-        // --- SIMULADOR TABLERO ---
         const loadsTablero = [
             { name: 'Laboratorio de Química', power: 2.55, icon: 'fa-flask' },
             { name: 'Laboratorio de Física', power: 2.21, icon: 'fa-atom' },
@@ -522,41 +476,18 @@
         const newBoardLimitAmps = 63;
         
         function initializeSimulatorTablero() {
-            const controlsAntiguo = document.getElementById('simulator-controls-antiguo');
-            const controlsNuevo = document.getElementById('simulator-controls-nuevo');
-            const simTabs = document.getElementById('sim-tabs-tablero');
+            const controlsContainer = document.getElementById('simulator-controls');
             
             const controlsHTML = loadsTablero.map((load, index) => `
                 <div class="flex items-center justify-between bg-slate-700 p-3 rounded-lg">
                     <div class="flex items-center"><i class="fas ${load.icon} mr-3 text-sky-400 text-lg w-6 text-center"></i><span>${load.name} (${load.power} kW)</span></div>
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none"><input type="checkbox" name="toggle-old-${index}" id="toggle-old-${index}" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" data-power="${load.power}"/><label for="toggle-old-${index}" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label></div>
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none"><input type="checkbox" name="toggle-sim-${index}" id="toggle-sim-${index}" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" data-power="${load.power}"/><label for="toggle-sim-${index}" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label></div>
                 </div>`).join('');
 
-            controlsAntiguo.innerHTML = controlsHTML;
-            controlsNuevo.innerHTML = controlsHTML.replaceAll('toggle-old-', 'toggle-new-');
+            controlsContainer.innerHTML = controlsHTML;
 
-            const allToggles = [...controlsAntiguo.querySelectorAll('.toggle-checkbox'), ...controlsNuevo.querySelectorAll('.toggle-checkbox')];
-            allToggles.forEach((checkbox, index) => {
-                checkbox.addEventListener('change', () => {
-                    const isChecked = checkbox.checked;
-                    allToggles.forEach(cb => { if(cb.dataset.power === checkbox.dataset.power) cb.checked = isChecked; });
-                    updateSimulatorTablero();
-                });
-            });
-            
-            simTabs.querySelectorAll('.sim-tab').forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if(tab.classList.contains('disabled')) return;
-                    const tabId = tab.dataset.tab;
-                     if (tabId === "2") {
-                         simTabs.querySelector('[data-tab="3"]').classList.remove('disabled');
-                     }
-                    simTabs.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    projectContainers.tablero.querySelectorAll('.sim-tab-content').forEach(c => c.classList.remove('active'));
-                    document.getElementById(`sim-tab-content-tablero-${tabId}`).classList.add('active');
-                });
+            controlsContainer.querySelectorAll('.toggle-checkbox').forEach((checkbox) => {
+                checkbox.addEventListener('change', updateSimulatorTablero);
             });
 
             updateSimulatorTablero();
@@ -564,41 +495,29 @@
 
         function updateSimulatorTablero() {
             let totalPower = 0;
-            document.querySelectorAll('#simulator-controls-antiguo .toggle-checkbox:checked').forEach(checkbox => {
+            document.querySelectorAll('#simulator-controls .toggle-checkbox:checked').forEach(checkbox => {
                 totalPower += parseFloat(checkbox.dataset.power);
             });
             
             const totalCurrent = totalPower > 0 ? (totalPower * 1000) / (380 * 1.732 * 0.9) : 0;
             
-            document.getElementById('power-display-antiguo').innerHTML = `${totalPower.toFixed(1)} <span class="text-lg">kW</span>`;
-            document.getElementById('current-display-antiguo').innerHTML = `${totalCurrent.toFixed(1)} <span class="text-lg">A</span>`;
+            document.getElementById('power-display').innerHTML = `${totalPower.toFixed(1)} <span class="text-lg">kW</span>`;
+            document.getElementById('current-display').innerHTML = `${totalCurrent.toFixed(1)} <span class="text-lg">A</span>`;
             
-            const isOverload = totalCurrent > oldBoardLimitAmps;
-            const statusUI = {
-                old: { container: document.getElementById('old-board-status'), indicator: document.getElementById('old-board-indicator'), text: document.getElementById('old-board-text'), desc: document.getElementById('old-board-desc') },
-                new: { container: document.getElementById('new-board-status'), indicator: document.getElementById('new-board-indicator'), text: document.getElementById('new-board-text'), desc: document.getElementById('new-board-desc') }
-            };
+            const isOverloadOld = totalCurrent > oldBoardLimitAmps;
+            const statusUIOld = { container: document.getElementById('old-board-status'), indicator: document.getElementById('old-board-indicator'), text: document.getElementById('old-board-text'), desc: document.getElementById('old-board-desc') };
+            const statusUINew = { container: document.getElementById('new-board-status'), indicator: document.getElementById('new-board-indicator'), text: document.getElementById('new-board-text'), desc: document.getElementById('new-board-desc') };
 
-            const tab2 = document.querySelector('#sim-tabs-tablero [data-tab="2"]');
-            const tab3 = document.querySelector('#sim-tabs-tablero [data-tab="3"]');
-            const activeTab = document.querySelector('#sim-tabs-tablero .sim-tab.active').dataset.tab;
-
-            if (isOverload) {
-                updateStatusUI(statusUI.old, 'SOBRECARGA', `La demanda supera la capacidad (${oldBoardLimitAmps}A). Riesgo de corte y sobrecalentamiento.`, 'red');
-                tab2.classList.remove('disabled');
+            if (isOverloadOld) {
+                updateStatusUI(statusUIOld, 'SOBRECARGA', `Demanda supera ${oldBoardLimitAmps}A. Riesgo de corte.`, 'red');
             } else {
-                updateStatusUI(statusUI.old, 'OK', `Límite estimado: ${oldBoardLimitAmps}A. El sistema opera dentro de los límites.`, 'green');
-                if (activeTab !== "1") {
-                    document.querySelector('#sim-tabs-tablero [data-tab="1"]').click();
-                }
-                tab2.classList.add('disabled');
-                tab3.classList.add('disabled');
+                updateStatusUI(statusUIOld, 'OK', `Límite: 25A. El sistema opera dentro de los límites.`, 'green');
             }
 
             if (totalCurrent > newBoardLimitAmps) {
-                 updateStatusUI(statusUI.new, 'LÍMITE ALCANZADO', `Límite: ${newBoardLimitAmps}A. Las protecciones actuarían.`, 'red');
+                 updateStatusUI(statusUINew, 'LÍMITE ALCANZADO', `Límite: ${newBoardLimitAmps}A. Las protecciones actuarían.`, 'red');
             } else {
-                updateStatusUI(statusUI.new, 'SEGURO Y NORMATIVO', `Límite: ${newBoardLimitAmps}A. Opera con amplio margen de seguridad.`, 'green');
+                updateStatusUI(statusUINew, 'SEGURO', `Límite: 63A. Opera con amplio margen de seguridad.`, 'green');
             }
         }
 
@@ -625,3 +544,6 @@
     </script>
 </body>
 </html>
+
+
+
