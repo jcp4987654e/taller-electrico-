@@ -9,118 +9,208 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Teko:wght@400;600&display=swap" rel="stylesheet">
     <!-- Iconos (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
-            --sky-400: #38bdf8;
-            --slate-800: #1e293b;
-            --slate-900: #0f172a;
-            --green-400: #4ade80;
-            --yellow-400: #facc15;
-            --red-500: #ef4444;
-            --gray-500: #6b7280;
+            --primary-blue: #00A9FF;
+            --light-blue: #89CFF3;
+            --dark-bg: #0C1117;
+            --glass-bg: rgba(22, 29, 47, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #F0F2F5;
+            --text-secondary: #a8b2c1;
+            --green-accent: #16a34a;
+            --red-accent: #dc2626;
         }
         html {
-             scroll-padding-top: 150px;
+             scroll-padding-top: 120px;
         }
         body {
-            font-family: 'Roboto Mono', monospace;
-            background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #334155);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #EAEAEA;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
         }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        body.presentation-mode {
+
+        /* --- Animated Background --- */
+        #background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
             overflow: hidden;
         }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-blue), transparent 60%);
+            opacity: 0;
+            animation: float 25s infinite ease-in-out;
+        }
+        .circle:nth-child(1) { width: 150px; height: 150px; top: 10%; left: 15%; animation-delay: 0s; }
+        .circle:nth-child(2) { width: 250px; height: 250px; top: 70%; left: 80%; animation-delay: 5s; }
+        .circle:nth-child(3) { width: 100px; height: 100px; top: 80%; left: 10%; animation-delay: 10s; }
+        .circle:nth-child(4) { width: 200px; height: 200px; top: 20%; left: 70%; animation-delay: 15s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            50% { opacity: 0.1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* --- General Styling --- */
         .section-title {
             font-family: 'Teko', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 1px;
-            color: #f8fafc;
+            font-size: 4rem;
+            letter-spacing: 1.5px;
+            color: var(--text-primary);
+            font-weight: 600;
         }
         .card {
-            background-color: var(--slate-800);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s, border-color 0.3s;
-            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(56, 189, 248, 0.1);
-            border-color: var(--sky-400);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px 0 rgba(0, 169, 255, 0.2);
         }
         .card-title {
-            color: #7dd3fc;
-            margin-bottom: 15px;
-            font-size: 1.25rem;
-            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
-        
+        .prose { color: var(--text-secondary); }
+        .prose strong { color: var(--text-primary); }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(12, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        #sticky-nav {
+            background: rgba(12, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease-in-out, opacity 0.4s;
+        }
+        .sticky-nav-item {
+            background-color: var(--glass-bg);
+            color: var(--text-secondary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease; cursor: pointer;
+            border: 1px solid var(--glass-border);
+        }
+        .sticky-nav-item:hover {
+            transform: scale(1.15);
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        .sticky-nav-item.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--green-accent);
+            background-color: var(--green-accent);
+            color: var(--text-primary);
+            border-color: var(--green-accent);
+        }
+
+        /* --- Main Intro --- */
         .project-selection-card {
             cursor: pointer;
             overflow: hidden;
         }
         .project-selection-card .project-title {
             font-family: 'Teko', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             line-height: 1.1;
         }
-        
-        /* Timeline */
-        .full-timeline-container { position: relative; padding: 2rem 0; }
-        .full-timeline-container::before { content: ''; position: absolute; top: 0; left: 1rem; width: 4px; height: 100%; background-color: var(--slate-800); border-radius: 2px; }
-        .timeline-block { position: relative; padding-left: 4rem; margin-bottom: 2rem; }
-        .timeline-dot { position: absolute; top: 0.25rem; left: 0; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.3s ease; }
-        .timeline-content { padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; transition: all 0.3s ease; }
-        
-        .timeline-block.enabled .timeline-dot { background-color: var(--slate-800); border: 4px solid var(--sky-400); color: var(--sky-400); }
-        .timeline-block.enabled .timeline-content { cursor: pointer; background-color: var(--slate-800); }
-        .timeline-block.enabled .timeline-content:hover { border-color: var(--sky-400); transform: translateX(10px); }
-        .timeline-block.completed .timeline-dot { background-color: var(--sky-400); border: 4px solid var(--slate-900); color: var(--slate-900); }
-        .timeline-block.completed .timeline-content { cursor: pointer; background-color: #1e3a8a; }
-        .timeline-block.completed .timeline-content:hover { border-color: var(--sky-400); transform: translateX(10px); }
-        .timeline-block.active .timeline-dot { background-color: var(--green-400); border: 4px solid var(--slate-900); color: var(--slate-900); transform: scale(1.1); }
-        .timeline-block.active .timeline-content { border-color: var(--green-400); box-shadow: 0 0 15px rgba(74, 222, 128, 0.2); }
-        .timeline-block.disabled { opacity: 0.5; }
-        .timeline-block.disabled .timeline-dot { background-color: var(--slate-800); border: 4px solid var(--gray-500); color: var(--gray-500); }
-        .timeline-block.disabled .timeline-content { cursor: not-allowed; background-color: var(--slate-800); }
 
-        #sticky-nav { transition: transform 0.4s ease-in-out, opacity 0.4s; }
-        .sticky-nav-item { transition: all 0.3s ease; cursor: pointer; }
-        .sticky-nav-item.disabled { filter: grayscale(1); opacity: 0.4; cursor: not-allowed; }
-        .sticky-nav-item.enabled:hover, .sticky-nav-item.completed:hover, #home-btn:hover { transform: scale(1.15); }
-        .sticky-nav-item.active { transform: scale(1.2); box-shadow: 0 0 15px var(--green-400); }
+        /* --- Timeline --- */
+        .full-timeline-container { position: relative; padding-top: 2rem; }
+        .full-timeline-container::before { content: ''; position: absolute; top: 0; left: 24px; width: 2px; height: 100%; background: var(--glass-border); }
+        .timeline-block { position: relative; padding-left: 70px; margin-bottom: 2.5rem; }
+        .timeline-dot { position: absolute; top: 0.1rem; left: 10px; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s ease; }
+        .timeline-content { padding: 1.25rem; border-radius: 12px; border: 1px solid transparent; transition: all 0.3s ease; cursor: pointer; background: var(--glass-bg); }
         
-        .content-section { display: none; }
+        .timeline-block.enabled .timeline-dot { background: var(--glass-bg); border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+        .timeline-block.enabled .timeline-content:hover { border-color: var(--primary-blue); transform: translateX(10px); }
+        .timeline-block.active .timeline-dot { background-color: var(--green-accent); border: 2px solid var(--green-accent); color: var(--text-primary); transform: scale(1.1); }
+        .timeline-block.active .timeline-content { border-color: var(--green-accent); box-shadow: 0 0 15px rgba(22, 163, 74, 0.3); }
+
+        /* --- Presentation Mode --- */
+        body.presentation-mode { overflow: hidden; }
+        #progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--glass-bg);
+            z-index: 60;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+            border-radius: 0 4px 4px 0;
+            transition: width 0.5s ease;
+        }
+        body.presentation-mode #progress-bar-container { opacity: 1; }
+
+        /* --- Content Sections --- */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .content-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         
-        /* Toggle Switch */
-        .toggle-checkbox:checked + .toggle-label { background-color: var(--green-400); }
-        .toggle-checkbox:checked + .toggle-label .toggle-ball { transform: translateX(100%); }
-        
-        /* Modal y otros */
+        /* Modal, Video, Hotspot */
         .image-modal-backdrop { transition: opacity 0.3s ease-in-out; }
         .image-modal-content { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
-        .clickable-image { cursor: pointer; transition: filter 0.3s ease; }
-        .clickable-image:hover { filter: brightness(1.2); }
-        .dashboard-display { background-color: #1a242f; border-radius: 8px; padding: 1rem; text-align: center; border: 1px solid #4a5568; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
-        .dashboard-label { font-size: 0.8rem; color: var(--sky-400); text-transform: uppercase; }
-        .dashboard-value { font-size: 2.5rem; font-weight: bold; color: white; line-height: 1; }
-        .status-indicator { display: inline-block; width: 1rem; height: 1rem; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle; }
-        
+        .clickable-image { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 8px; }
+        .clickable-image:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 169, 255, 0.4); }
+        video { border-radius: 12px; border: 1px solid var(--glass-border); }
+        .map-hotspot { position: absolute; width:32px; height:32px; background-color: rgba(0, 169, 255, 0.4); border: 2px solid var(--primary-blue); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(4px); animation: pulse 2.5s infinite; }
+        .map-hotspot:hover { background-color: rgba(0, 169, 255, 0.8); transform: scale(1.2); animation-play-state: paused; }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 169, 255, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 12px rgba(0, 169, 255, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 169, 255, 0); } }
+
+        /* Dashboard & Simulator */
+        .dashboard-display { background-color: rgba(12, 17, 23, 0.7); border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid var(--glass-border); }
+        .dashboard-label { font-size: 0.9rem; color: var(--light-blue); font-weight: 300; }
+        .dashboard-value { font-size: 2.5rem; font-weight: 600; color: var(--text-primary); line-height: 1; margin-top: 0.5rem; }
+        .status-indicator { display: inline-block; width: 1rem; height: 1rem; border-radius: 50%; margin-right: 0.75rem; vertical-align: middle; }
+        .toggle-label { display: block; overflow: hidden; height: 1.75rem; border-radius: 9999px; background-color: rgba(255,255,255,0.1); cursor: pointer; transition: background-color 0.3s; }
+        .toggle-ball { content: ''; position: absolute; top: 0.25rem; left: 0.25rem; width: 1.25rem; height: 1.25rem; border-radius: 50%; background-color: white; transition: transform 0.3s; }
+        .toggle-checkbox:checked + .toggle-label { background-color: var(--green-accent); }
+        .toggle-checkbox:checked + .toggle-label .toggle-ball { transform: translateX(1.5rem); }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
+    <div id="background-animation">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
 
     <header class="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -140,44 +230,33 @@
         </nav>
     </header>
 
-    <div id="sticky-nav" class="sticky top-[65px] z-40 bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 py-3 transform -translate-y-full opacity-0">
+    <div id="sticky-nav" class="sticky top-[65px] z-40 transform -translate-y-full opacity-0">
         <div id="sticky-nav-items" class="container mx-auto px-6 flex justify-center items-center space-x-2 md:space-x-6"></div>
     </div>
 
     <main class="container mx-auto px-6 py-8">
         
         <section id="main-intro-section">
-             <div class="text-center">
+             <div class="text-center my-12">
                  <h1 class="section-title">Proyecto de Mejora Eléctrica</h1>
-                 <p class="text-xl text-slate-300 mt-2">Una presentación interactiva del trabajo realizado.</p>
+                 <p class="text-xl text-slate-300 mt-2 max-w-3xl mx-auto">Una presentación interactiva de la reforma integral del tablero seccional del 2° piso.</p>
              </div>
-             <div class="grid lg:grid-cols-2 gap-12 items-center mt-12 max-w-5xl mx-auto">
-                 <div>
-                     <div class="prose prose-invert max-w-none text-slate-300 mb-8">
-                         <h3 class="text-sky-400 text-2xl" style="font-family: 'Teko', sans-serif;">Introducción General</h3>
-                         <p>Este proyecto representa un esfuerzo integral para mejorar la infraestructura eléctrica de nuestra institución.</p>
-                         <p>Se abordan la seguridad, capacidad y eficiencia de las instalaciones para cumplir con la normativa vigente.</p>
+             <div class="grid lg:grid-cols-2 gap-12 items-center mt-12 max-w-6xl mx-auto">
+                 <div class="card">
+                     <h3 class="card-title"><i class="fas fa-rocket mr-2"></i> Nuestro Objetivo</h3>
+                     <div class="prose">
+                         <p>Este proyecto representa un esfuerzo integral para mejorar la infraestructura eléctrica de nuestra institución. Se abordan la seguridad, capacidad y eficiencia de las instalaciones para cumplir con la normativa vigente.</p>
                          <p class="mt-4">Haga clic en el proyecto para explorar sus fases y resultados.</p>
                      </div>
-
-                     <div class="card p-6">
-                           <h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Protagonistas del Proyecto</h3>
-                           <div class="mt-4">
-                               <div>
-                                   <h4 class="font-bold text-white mb-2 text-center">Equipo de Trabajo</h4>
-                                   <ul id="student-list-tablero" class="text-sm text-slate-300 space-y-1 text-center"></ul>
-                               </div>
-                           </div>
-                           <hr class="border-slate-600 my-4">
-                           <div class="flex justify-center items-center space-x-8">
-                             <img src="https://13dejulio.edu.ar/wp-content/uploads/2022/03/Isologotipo-13-de-Julio-400.png" alt="Logo Instituto" class="h-10">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Edesur_logo22.png" alt="Logo Edesur" class="h-10">
-                           </div>
-                     </div>
+                     <hr class="border-slate-600/50 my-6">
+                     <h4 class="font-bold text-white mb-4 text-center">Equipo de Trabajo</h4>
+                     <ul id="student-list-tablero" class="text-sm text-slate-300 space-y-1 text-center font-light"></ul>
                  </div>
-                  <div class="space-y-8 flex flex-col justify-center">
-                      <div id="select-project-tablero" class="card project-selection-card">
-                          <div class="text-center"><i class="fas fa-tasks text-5xl text-sky-400 mb-4"></i><h2 class="project-title">Reforma de Tablero Seccional</h2><p class="text-slate-400">Enfoque en Seguridad, Capacidad y Cumplimiento Normativo.</p></div>
+                  <div class="flex flex-col justify-center">
+                      <div id="select-project-tablero" class="card project-selection-card text-center">
+                          <i class="fas fa-tasks text-6xl text-primary-blue mb-4"></i>
+                          <h2 class="project-title">Reforma de Tablero Seccional</h2>
+                          <p class="text-slate-400 mt-2">Enfoque en Seguridad, Capacidad y Cumplimiento Normativo.</p>
                       </div>
                    </div>
              </div>
@@ -189,12 +268,29 @@
                 <div class="text-center"><h1 class="section-title">Reforma y Adecuación de Tablero Seccional</h1><p class="text-2xl text-slate-300 mt-2" style="font-family: 'Teko', sans-serif;">Garantizando Seguridad y Funcionalidad bajo Normativa AEA 90364</p></div>
                 
                 <div class="card mt-12">
-                    <h3 class="card-title"><i class="fas fa-info-circle mr-2"></i>Problema, Marco y Objetivo</h3>
+                    <h3 class="card-title"><i class="fas fa-map-marked-alt mr-2"></i>Ubicación y Modelos 3D</h3>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="prose prose-invert text-slate-300">
-                            <p><strong>Problema:</strong> El tablero eléctrico del 2° piso incumple normativas vigentes, es poco funcional y representa un riesgo para la seguridad.</p>
-                            <p><strong>Marco:</strong> Este tablero alimenta áreas críticas: 4 laboratorios, biblioteca, planta de biodiesel y sala audiovisual.</p>
-                             <p class="mt-4"><strong>Objetivo:</strong> Reformar integralmente el tablero para adecuarlo a la normativa, garantizar la seguridad, mejorar su funcionalidad y dejar una mejora duradera en la institución.</p>
+                        <div class="relative">
+                            <img src="https://i.imgur.com/7vjQJ3c.png" alt="Plano del 2do Piso" class="rounded-lg w-full">
+                            <div class="map-hotspot" style="top: 45%; left: 25%;" data-modal-title="Tableros Laboratorios" data-modal-img="https://placehold.co/800x600/0C1117/00A9FF?text=Modelo+3D+Laboratorios"></div>
+                            <div class="map-hotspot" style="top: 45%; left: 70%;" data-modal-title="Tablero Biblioteca" data-modal-img="https://placehold.co/800x600/0C1117/00A9FF?text=Modelo+3D+Biblioteca"></div>
+                        </div>
+                         <div>
+                            <h4 class="text-xl font-bold text-center mb-4 text-green-accent">Modelo 3D del Nuevo Tablero</h4>
+                            <video controls class="w-full" poster="https://placehold.co/600x400/1e293b/ffffff?text=Preview+Video+3D">
+                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                Tu navegador no soporta el tag de video.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-8">
+                    <h3 class="card-title"><i class="fas fa-info-circle mr-2"></i>Descripción del Proyecto</h3>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="prose prose-invert text-slate-300 max-w-none">
+                            <p>El proyecto consiste en reformar integralmente el tablero eléctrico del segundo piso de la institución, el cual actualmente incumple las normativas vigentes y presenta una baja funcionalidad y desorden visual.</p>
+                            <p>Este tablero abastece áreas clave como laboratorios, biblioteca, planta de biodiésel y sala audiovisual, por lo que resulta fundamental mejorar su operatividad y presentación general.</p>
                         </div>
                         <img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero Seccional" alt="Tablero eléctrico antiguo con cables desordenados">
                     </div>
@@ -204,19 +300,19 @@
             </section>
             <hr class="border-slate-700 my-16">
             <div class="content-container">
-                <section data-step-id="relevamiento" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-search-location mr-2"></i>Relevamiento Inicial</h3><p class="text-slate-300 mb-6">Se relevó la instalación para comprender la distribución de cargas y documentar el estado original con fotos y el diagrama unifilar preexistente.</p><div class="grid lg:grid-cols-2 gap-8 items-start"><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Diagrama Unifilar Original</h4><img src="https://i.imgur.com/0Q8r7Zz.jpg" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama Unifilar Preexistente"></div><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Estado del Tablero</h4><div class="grid grid-cols-2 gap-4"><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Foto 1 del Tablero Antiguo"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Foto+Adicional+Tablero" class="rounded-lg shadow-lg clickable-image" data-title="Foto 2 del Tablero Antiguo"></div></div></div></div></section>
+                <section data-step-id="relevamiento" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-search-location mr-2"></i>Relevamiento Inicial</h3><p class="text-slate-300 mb-6">Se relevó la instalación para comprender la distribución de cargas y documentar el estado original con fotos y el diagrama unifilar preexistente.</p><div class="grid lg:grid-cols-2 gap-8 items-start"><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Diagrama Unifilar Original</h4><img src="https://i.imgur.com/0Q8r7Zz.jpg" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama Unifilar Preexistente"></div><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Estado del Tablero</h4><div class="grid grid-cols-2 gap-4"><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Foto 1 del Tablero Antiguo"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Relevamiento+2" class="rounded-lg shadow-lg clickable-image" data-title="Foto 2 del Tablero Antiguo"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Relevamiento+3" class="rounded-lg shadow-lg clickable-image" data-title="Foto 3 del Tablero Antiguo"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Relevamiento+4" class="rounded-lg shadow-lg clickable-image" data-title="Foto 4 del Tablero Antiguo"></div></div></div></div></section>
                 <section data-step-id="organizacion" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tasks mr-2"></i>Gantt y Organización</h3><p class="text-slate-300 mb-6">La ejecución se planificó con un Diagrama de Gantt para gestionar tareas, plazos y recursos de manera eficiente.</p><img src="https://i.imgur.com/mU4P2Z4.png" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama de Gantt del Proyecto"></div></section>
-                <section data-step-id="planos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-drafting-compass mr-2"></i>Planos del Proyecto</h3><div class="grid md:grid-cols-3 gap-6 mt-6 text-center"><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Plano de Planta</h4><p class="text-sm text-slate-400 flex-grow mb-4">Diseño en AutoCAD de la distribución.</p><img src="https://i.imgur.com/7vjQJ3c.png" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Plano de Planta (AutoCAD)"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Modelo 3D</h4><p class="text-sm text-slate-400 flex-grow mb-4">Visualización tridimensional del tablero.</p><img src="https://placehold.co/400x300/1e293b/ffffff?text=Modelo+3D" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Modelo 3D del Tablero"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Unifilar Nuevo</h4><p class="text-sm text-slate-400 flex-grow mb-4">Esquema final de la instalación.</p><img src="https://i.imgur.com/9x6Bo3Z.jpg" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Diagrama Unifilar Nuevo"></div></div></div></section>
-                <section data-step-id="presupuesto" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Presupuesto</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div></div></section>
+                <section data-step-id="planos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-drafting-compass mr-2"></i>Planos del Proyecto</h3><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 text-center"><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Modelo 3D</h4><p class="text-sm text-slate-400 flex-grow mb-4">Visualización tridimensional del tablero.</p><img src="https://placehold.co/400x300/1e293b/ffffff?text=Modelo+3D" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Modelo 3D del Tablero"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Unifilar Nuevo</h4><p class="text-sm text-slate-400 flex-grow mb-4">Esquema final de la instalación.</p><img src="https://i.imgur.com/9x6Bo3Z.jpg" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Diagrama Unifilar Nuevo"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Detalle Constructivo</h4><p class="text-sm text-slate-400 flex-grow mb-4">Plano con detalles de montaje.</p><img src="https://placehold.co/400x300/1e293b/ffffff?text=Detalle" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Detalle Constructivo"></div><div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center"><h4 class="font-bold text-lg mb-2 text-white">Plano de Rieles</h4><p class="text-sm text-slate-400 flex-grow mb-4">Distribución interna de componentes.</p><img src="https://placehold.co/400x300/1e293b/ffffff?text=Rieles" class="rounded-lg shadow-lg clickable-image h-48 w-auto" data-title="Plano de Rieles"></div></div></div></section>
+                <section data-step-id="presupuesto" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Presupuesto</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Documentación de Presupuesto</h4><div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Presupuesto+1" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 1 (Casa A)"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Presupuesto+2" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 2 (Casa B)"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Presupuesto+3" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 3 (Casa C)"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Lista+Materiales" class="rounded-lg shadow-lg clickable-image" data-title="Lista Final de Materiales y Mano de Obra"></div></div></section>
                 <section data-step-id="contingencia" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-exclamation-triangle mr-2"></i>Plan de Contingencia</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="prose prose-invert text-slate-300"><p>Se diseñó un plan para minimizar la interrupción de actividades y garantizar la continuidad del suministro a áreas esenciales.</p><ul class="list-disc list-inside space-y-3 mt-4"><li><strong class="text-white">Alimentación Temporal:</strong> Se proveyó energía a áreas críticas desde líneas temporales seguras.</li><li><strong class="text-white">Seguridad y Control:</strong> Se usaron tableros provisionales con protecciones adecuadas.</li></ul></div><img src="https://placehold.co/600x400/1e293b/facc15?text=Foto+Tablero+Provisional" class="mt-4 rounded-lg shadow-lg clickable-image" data-title="Tablero Provisional Utilizado" alt="Tablero eléctrico provisional de obra"></div></section>
-                <section data-step-id="montaje" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje</h3><p class="text-slate-300 mb-6">El montaje se realizó siguiendo el diseño planificado, utilizando componentes normalizados para garantizar la calidad y seguridad de la nueva instalación.</p><div class="grid md:grid-cols-2 gap-8 items-center"><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">ANTES</h4><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero"></div><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">DESPUÉS</h4><img src="https://i.imgur.com/uN12N88.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></div></section>
-                <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><div class="card bg-slate-900/50"><h3 class="card-title"><i class="fas fa-tachometer-alt mr-2"></i>Simulador de Carga</h3><div><p class="text-gray-400 mb-6">Compare el comportamiento del tablero antiguo vs. el nuevo ante la misma demanda de carga.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls" class="space-y-4"></div><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="dashboard-display"><div class="dashboard-label">Corriente Total</div><div id="current-display" class="dashboard-value">0.0 <span class="text-lg">A</span></div></div><div class="dashboard-display"><div class="dashboard-label">Potencia Total</div><div id="power-display" class="dashboard-value">0.0 <span class="text-lg">kW</span></div></div></div><div id="old-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero ANTIGUO</h4><div class="flex items-center"><span id="old-board-indicator" class="status-indicator bg-green-400"></span><span id="old-board-text" class="font-bold">OK</span></div><p id="old-board-desc" class="text-sm text-gray-400 mt-2">Límite: 25A. El sistema opera dentro de los límites.</p></div><div id="new-board-status" class="bg-slate-900 p-4 mt-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero NUEVO</h4><div class="flex items-center"><span id="new-board-indicator" class="status-indicator bg-green-400"></span><span id="new-board-text" class="font-bold">SEGURO</span></div><p id="new-board-desc" class="text-sm text-gray-400 mt-2">Límite: 63A. Opera con amplio margen de seguridad.</p></div></div></div></div></div></div></section>
+                <section data-step-id="montaje" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje</h3><p class="text-slate-300 mb-6">La etapa de montaje se planificó en dos jornadas: la primera destinada al armado externo y montaje del tablero seccional, junto con la reorganización del tablero de biblioteca; y la segunda al reacondicionamiento de los tableros de laboratorio. Esta etapa se encuentra programada para realizarse próximamente, una vez recibidos los materiales correspondientes.</p><div class="grid md:grid-cols-2 gap-8 items-center"><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">ANTES</h4><img src="https://i.imgur.com/8A1z2Yn.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero"></div><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">DESPUÉS</h4><img src="https://i.imgur.com/uN12N88.jpg" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></div></section>
+                <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><div class="card bg-slate-900/50"><h3 class="card-title"><i class="fas fa-tachometer-alt mr-2"></i>Simulador de Carga</h3><div><p class="text-gray-400 mb-6">Compare el comportamiento del tablero antiguo vs. el nuevo ante la misma demanda de carga.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls" class="space-y-4"></div><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="dashboard-display"><div class="dashboard-label">Corriente Total</div><div id="current-display" class="dashboard-value">0.0 <span class="text-lg">A</span></div></div><div class="dashboard-display"><div class="dashboard-label">Potencia Total</div><div id="power-display" class="dashboard-value">0.0 <span class="text-lg">kW</span></div></div></div><div id="old-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero ANTIGUO</h4><div class="flex items-center"><span id="old-board-indicator" class="status-indicator bg-green-400"></span><span id="old-board-text" class="font-bold">OK</span></div><p id="old-board-desc" class="text-sm text-gray-400 mt-2">Límite: 25A. El sistema opera dentro de los límites.</p></div><div id="new-board-status" class="bg-slate-900 p-4 mt-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero NUEVO</h4><div class="flex items-center"><span id="new-board-indicator" class="status-indicator bg-green-400"></span><span id="new-board-text" class="font-bold">SEGURO</span></div><p id="new-board-desc" class="text-sm text-gray-400 mt-2">Límite: 63A. Opera con amplio margen de seguridad.</p></div></div></div></div></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Imágenes Finales y Mejoras</h4><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Resultado+1" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 1"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Resultado+2" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 2"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Resultado+3" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 3"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Resultado+4" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 4"><img src="https://placehold.co/400x300/1e293b/ffffff?text=Resultado+5" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 5"></div></div></section>
                 <section data-step-id="quienes-somos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Quiénes Somos</h3><div id="team-container" class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mt-6"></div></div></section>
             </div>
         </div>
 
     </main>
-
+    <div id="progress-bar-container"><div id="progress-bar"></div></div>
     <div id="presentation-nav" class="hidden"><div id="presentation-nav-prev" class="fixed left-4 top-1/2 -translate-y-1/2 z-50"><button class="p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full shadow-lg hover:bg-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"><i class="fas fa-chevron-left text-2xl text-white"></i></button></div><div id="presentation-nav-next" class="fixed right-4 top-1/2 -translate-y-1/2 z-50"><button class="p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full shadow-lg hover:bg-slate-700 transition"><i class="fas fa-chevron-right text-2xl text-white"></i></button></div></div>
     <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[70] hidden opacity-0 image-modal-backdrop"><div class="bg-slate-800 border border-slate-700 text-white p-4 rounded-lg shadow-xl w-11/12 max-w-4xl max-h-[90vh] flex flex-col scale-95 opacity-0 relative image-modal-content"><button id="modal-close-btn" class="absolute -top-4 -right-4 bg-white text-black rounded-full h-10 w-10 flex items-center justify-center text-2xl font-bold shadow-lg">&times;</button><h3 id="modal-title" class="text-2xl font-bold text-sky-400 flex-shrink-0 mb-4"></h3><div class="flex-grow overflow-hidden flex items-center justify-center"><img id="modal-image" src="" alt="Imagen ampliada" class="max-w-full max-h-full object-contain"></div></div></div>
 
@@ -227,10 +323,10 @@
                 title: 'Proyecto: Reforma de Tablero',
                 steps: [
                     { id: 'relevamiento', title: '1. Relevamiento', icon: 'fa-search-location' },
-                    { id: 'organizacion', title: '2. Gantt y Organización', icon: 'fa-tasks' },
+                    { id: 'organizacion', title: '2. Gantt', icon: 'fa-tasks' },
                     { id: 'planos', title: '3. Planos', icon: 'fa-drafting-compass' },
                     { id: 'presupuesto', title: '4. Presupuesto', icon: 'fa-chart-pie' },
-                    { id: 'contingencia', title: '5. Plan de Contingencia', icon: 'fa-exclamation-triangle' },
+                    { id: 'contingencia', title: '5. Contingencia', icon: 'fa-exclamation-triangle' },
                     { id: 'montaje', title: '6. Montaje', icon: 'fa-tools' },
                     { id: 'conclusiones', title: '7. Conclusiones', icon: 'fa-check-circle' },
                     { id: 'quienes-somos', title: '8. Quiénes Somos', icon: 'fa-users' }
@@ -247,7 +343,6 @@
 
         let currentProject = null;
         let activeStepIndex = -1;
-        let maxUnlockedStep = 0;
         let isPresentationMode = false;
 
         const mainTitle = document.getElementById('main-title');
@@ -266,6 +361,7 @@
             nextNavBtn: document.querySelector('#presentation-nav-next button')
         };
         const stickyNav = document.getElementById('sticky-nav');
+        const progressBar = document.getElementById('progress-bar');
         
         function showView(viewName) {
             mainIntroSection.style.display = 'none';
@@ -286,21 +382,29 @@
         function selectProject(projectName) {
             currentProject = projectName;
             activeStepIndex = -1;
-            maxUnlockedStep = 0;
             isPresentationMode = false;
             buildTeamSection();
             showView(projectName);
+            updateVisibleSections(); // <-- CORRECCIÓN: Asegura la visibilidad inicial
             updateAllNavs();
+            
+            // Re-observar elementos visibles
+            projectContainers[currentProject].querySelectorAll('.content-section, .overview-section > .card').forEach(el => {
+                if (el.style.display !== 'none') {
+                    observer.observe(el);
+                }
+            });
+            projectContainers[currentProject].querySelector('.overview-section').scrollIntoView();
         }
         
         function buildTeamSection() {
             const teamContainer = document.getElementById('team-container');
             const students = projects.tablero.students;
             teamContainer.innerHTML = students.map(student => `
-                <div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center text-center">
-                    <img src="${student.photo}" alt="Foto de ${student.name}" class="w-32 h-32 rounded-full mb-4 border-2 border-sky-400 object-cover">
+                <div class="bg-slate-900/70 p-4 rounded-lg flex flex-col items-center text-center transition-transform transform hover:scale-105">
+                    <img src="${student.photo}" alt="Foto de ${student.name}" class="w-32 h-32 rounded-full mb-4 border-2 border-primary-blue object-cover">
                     <h4 class="text-xl font-bold text-white">${student.name}</h4>
-                    <a href="#" class="text-sky-400 hover:text-sky-300 transition my-2"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="text-primary-blue hover:text-light-blue transition my-2"><i class="fab fa-linkedin fa-2x"></i></a>
                     <img src="${student.qr}" alt="QR de ${student.name}" class="w-24 h-24 rounded-md mt-2">
                 </div>
             `).join('');
@@ -309,8 +413,7 @@
         function backToMainMenu() {
             currentProject = null;
             activeStepIndex = -1;
-            maxUnlockedStep = 0;
-            if (isPresentationMode) controls.playBtn.click();
+            if (isPresentationMode) togglePresentationMode();
             showView('main');
         }
 
@@ -322,13 +425,12 @@
             renderFullTimeline();
             renderStickyNav();
             updatePresentationNavButtons();
+            updateProgressBar();
         }
 
         function getStatusClass(index) {
             if (index === activeStepIndex) return 'active';
-            if (index < maxUnlockedStep) return 'completed';
-            if (index === maxUnlockedStep) return 'enabled';
-            return 'disabled';
+            return 'enabled';
         }
 
         function renderFullTimeline() {
@@ -342,25 +444,15 @@
 
         function renderStickyNav() {
             const stickyNavItemsContainer = document.getElementById('sticky-nav-items');
-            const homeButton = `<div id="home-btn" class="sticky-nav-item bg-gray-600 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer" title="Volver al Inicio del Proyecto"><i class="fas fa-step-backward text-white"></i></div>`;
+            const homeButton = `<div id="home-btn" class="sticky-nav-item" title="Volver al Inicio del Proyecto"><i class="fas fa-home"></i></div>`;
             const stepsHTML = projects[currentProject].steps.map((step, index) => {
                 const status = getStatusClass(index);
-                let colorClass = 'bg-slate-700';
-                if (status === 'active') colorClass = 'bg-green-500';
-                else if (status === 'completed') colorClass = 'bg-blue-800';
-                else if (status === 'enabled') colorClass = 'bg-sky-500';
-                
-                return `<div class="sticky-nav-item ${status} ${colorClass} rounded-full w-10 h-10 flex items-center justify-center" data-index="${index}" title="${step.title}"><i class="fas ${step.icon} text-white"></i></div>`;
+                return `<div class="sticky-nav-item ${status}" data-index="${index}" title="${step.title}"><i class="fas ${step.icon}"></i></div>`;
             }).join('');
             stickyNavItemsContainer.innerHTML = homeButton + stepsHTML;
             addTimelineListeners(stickyNavItemsContainer);
             document.getElementById('home-btn').addEventListener('click', () => {
-                 activeStepIndex = -1;
-                 maxUnlockedStep = 0;
-                 if(isPresentationMode) controls.playBtn.click();
-                 updateVisibleSections();
-                 updateAllNavs();
-                 projectContainers[currentProject].querySelector('.overview-section').scrollIntoView({ behavior: 'smooth' });
+                 setActiveStep(-1, true);
             });
         }
         
@@ -369,63 +461,84 @@
                 block.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const index = parseInt(block.dataset.index);
-                    if (getStatusClass(index) !== 'disabled') setActiveStep(index, true);
+                    setActiveStep(index, true);
                 });
             });
         }
 
         function setActiveStep(index, shouldScroll = false) {
-            const projectData = projects[currentProject];
-            if (index < 0 || index >= projectData.steps.length || index > maxUnlockedStep) return;
             activeStepIndex = index;
-            maxUnlockedStep = Math.max(maxUnlockedStep, index + 1);
-            updateVisibleSections();
+            
+            updateVisibleSections(); // <-- CORRECCIÓN: Actualiza la vista en ambos modos
             updateAllNavs();
             
-            const overviewSection = projectContainers[currentProject].querySelector('.overview-section');
             if (activeStepIndex > -1) {
                 stickyNav.classList.remove('opacity-0', '-translate-y-full');
-            } else {
+            } else if (!isPresentationMode) {
                 stickyNav.classList.add('opacity-0', '-translate-y-full');
             }
 
-            const targetSection = projectContainers[currentProject].querySelector(`[data-step-id="${projectData.steps[index].id}"]`);
+            let targetSection;
+            if (index === -1) {
+                targetSection = projectContainers[currentProject].querySelector('.overview-section');
+            } else {
+                targetSection = projectContainers[currentProject].querySelector(`[data-step-id="${projects[currentProject].steps[index].id}"]`);
+            }
             if (shouldScroll && targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         function updateVisibleSections() {
             if (!currentProject) return;
-            const projectData = projects[currentProject];
-            const container = projectContainers[currentProject];
-            container.querySelector('.overview-section').style.display = activeStepIndex === -1 ? 'block' : 'none';
-            container.querySelectorAll('.content-section').forEach((sec) => {
+
+            const isExploring = !isPresentationMode;
+            projectContainers[currentProject].querySelector('.overview-section').style.display = isExploring || activeStepIndex === -1 ? 'block' : 'none';
+            
+            projectContainers[currentProject].querySelectorAll('.content-section').forEach((sec) => {
                 const secId = sec.dataset.stepId;
-                const index = projectData.steps.findIndex(step => step.id === secId);
-                let shouldBeVisible = false;
-                if(isPresentationMode) shouldBeVisible = (index === activeStepIndex);
-                else shouldBeVisible = (index < maxUnlockedStep);
+                const index = projects[currentProject].steps.findIndex(step => step.id === secId);
+                let shouldBeVisible = isExploring || (index === activeStepIndex);
                 sec.style.display = shouldBeVisible ? 'block' : 'none';
             });
         }
         
-        controls.playBtn.addEventListener('click', () => {
+        function togglePresentationMode() {
             isPresentationMode = !isPresentationMode;
             document.body.classList.toggle('presentation-mode', isPresentationMode);
             controls.playIcon.classList.toggle('hidden', isPresentationMode);
             controls.stopIcon.classList.toggle('hidden', !isPresentationMode);
             controls.presentationNav.style.display = isPresentationMode ? 'block' : 'none';
-            if (isPresentationMode && activeStepIndex === -1) setActiveStep(0, true);
-            updateVisibleSections();
-            updatePresentationNavButtons();
-        });
+            
+            if (isPresentationMode && activeStepIndex === -1) {
+                setActiveStep(0, true);
+            } else {
+                updateVisibleSections(); // <-- CORRECCIÓN: Asegura la actualización al salir del modo
+                updatePresentationNavButtons();
+            }
+        }
         
-        controls.prevNavBtn.addEventListener('click', () => setActiveStep(activeStepIndex - 1, true));
-        controls.nextNavBtn.addEventListener('click', () => setActiveStep(activeStepIndex + 1, true));
+        function updateProgressBar() {
+            if(isPresentationMode && currentProject) {
+                const totalSteps = projects[currentProject].steps.length;
+                const percentage = (activeStepIndex + 1) / totalSteps * 100;
+                progressBar.style.width = `${percentage}%`;
+            } else {
+                progressBar.style.width = '0%';
+            }
+        }
+
+        controls.playBtn.addEventListener('click', togglePresentationMode);
+        
+        controls.prevNavBtn.addEventListener('click', () => {
+            if (activeStepIndex > 0) setActiveStep(activeStepIndex - 1, true);
+        });
+        controls.nextNavBtn.addEventListener('click', () => {
+             if (activeStepIndex < projects[currentProject].steps.length - 1) setActiveStep(activeStepIndex + 1, true);
+        });
         
         function updatePresentationNavButtons() {
             if (!isPresentationMode || !currentProject) return;
-            controls.prevNavBtn.disabled = activeStepIndex <= 0;
-            controls.nextNavBtn.disabled = activeStepIndex >= maxUnlockedStep - 1 || activeStepIndex === projects[currentProject].steps.length - 1;
+            controls.prevNavBtn.disabled = activeStepIndex < 0; // Allows going back to overview
+            controls.nextNavBtn.disabled = activeStepIndex >= projects[currentProject].steps.length - 1;
         }
         
         const modal = document.getElementById('image-modal');
@@ -443,8 +556,11 @@
             modal.classList.add('opacity-0');
             setTimeout(() => modal.classList.add('hidden'), 300);
         };
-        document.querySelectorAll('.clickable-image').forEach(el => {
-            el.addEventListener('click', (e) => openModal(e.currentTarget.dataset.title, e.currentTarget.src));
+        document.querySelectorAll('.clickable-image, .map-hotspot').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(e.currentTarget.dataset.title || e.currentTarget.dataset.modalTitle, e.currentTarget.src || e.currentTarget.dataset.modalImg)
+            });
         });
         document.getElementById('modal-close-btn').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
@@ -479,9 +595,12 @@
             const controlsContainer = document.getElementById('simulator-controls');
             
             const controlsHTML = loadsTablero.map((load, index) => `
-                <div class="flex items-center justify-between bg-slate-700 p-3 rounded-lg">
-                    <div class="flex items-center"><i class="fas ${load.icon} mr-3 text-sky-400 text-lg w-6 text-center"></i><span>${load.name} (${load.power} kW)</span></div>
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none"><input type="checkbox" name="toggle-sim-${index}" id="toggle-sim-${index}" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" data-power="${load.power}"/><label for="toggle-sim-${index}" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label></div>
+                <div class="flex items-center justify-between bg-slate-900/50 p-3 rounded-lg border border-slate-700">
+                    <div class="flex items-center"><i class="fas ${load.icon} mr-4 text-primary-blue text-lg w-6 text-center"></i><span>${load.name}</span></div>
+                    <div class="relative inline-block w-14 h-7 align-middle select-none">
+                        <input type="checkbox" name="toggle-sim-${index}" id="toggle-sim-${index}" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white appearance-none cursor-pointer" data-power="${load.power}"/>
+                        <label for="toggle-sim-${index}" class="toggle-label"><span class="toggle-ball"></span></label>
+                    </div>
                 </div>`).join('');
 
             controlsContainer.innerHTML = controlsHTML;
@@ -511,7 +630,7 @@
             if (isOverloadOld) {
                 updateStatusUI(statusUIOld, 'SOBRECARGA', `Demanda supera ${oldBoardLimitAmps}A. Riesgo de corte.`, 'red');
             } else {
-                updateStatusUI(statusUIOld, 'OK', `Límite: 25A. El sistema opera dentro de los límites.`, 'green');
+                updateStatusUI(statusUIOld, 'OK', `Límite: 25A. Opera dentro de los límites.`, 'green');
             }
 
             if (totalCurrent > newBoardLimitAmps) {
@@ -523,8 +642,8 @@
 
         function updateStatusUI(elements, text, desc, color) {
             const colors = {
-                red: { bg: 'bg-red-500', border: 'border-red-500', text: 'text-red-400' },
-                green: { bg: 'bg-green-400', border: 'border-green-500', text: 'text-green-400' }
+                red: { bg: 'bg-red-accent', border: 'border-red-accent' },
+                green: { bg: 'bg-green-accent', border: 'border-green-accent' }
             };
             const otherColor = color === 'red' ? 'green' : 'red';
             
@@ -532,18 +651,30 @@
             elements.indicator.classList.add(colors[color].bg);
             elements.container.classList.remove(colors[otherColor].border);
             elements.container.classList.add(colors[color].border);
-            elements.text.classList.remove(colors[otherColor].text);
-            elements.text.classList.add(colors[color].text);
             elements.text.textContent = text;
             elements.desc.textContent = desc;
         }
 
         initializeSimulatorTablero();
         showView('main');
+        
+        // --- Animation on Scroll ---
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerInstance.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
     });
     </script>
 </body>
 </html>
-
-
-
