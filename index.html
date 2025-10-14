@@ -254,7 +254,7 @@
                      <h4 class="font-bold text-white mb-4 text-center">Equipo de Trabajo</h4>
                      <ul id="student-list-tablero" class="text-sm text-slate-300 space-y-1 text-center font-light"></ul>
                      <hr class="border-slate-600/50 my-6">
-                     <div class="flex justify-center items-center">
+                     <div class="flex justify-center items-center bg-white p-2 rounded-md">
                         <img src="https://i.imgur.com/lia9JeX.png" alt="Logo Instituto" class="h-12">
                      </div>
                  </div>
@@ -339,7 +339,7 @@
                 </section>
                 <section data-step-id="presupuesto" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Presupuesto</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Documentación de Presupuesto</h4><div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"><img src="https://i.imgur.com/yP7vX4t.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 1 (Casa A)"><img src="https://i.imgur.com/1RArqdC.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 2 (Casa B)"><img src="https://i.imgur.com/Qask1xv.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 3 (Casa C)"><img src="https://i.imgur.com/3WFA2ta.png" class="rounded-lg shadow-lg clickable-image" data-title="Mano de Obra y Lista de Materiales"></div></div></section>
                 <section data-step-id="montaje" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje</h3><p class="text-slate-300 mb-6">La etapa de montaje se planificó en dos jornadas: la primera destinada al armado externo y montaje del tablero seccional, junto con la reorganización del tablero de biblioteca; y la segunda al reacondicionamiento de los tableros de laboratorio. Esta etapa se encuentra programada para realizarse próximamente, una vez recibidos los materiales correspondientes.</p><div class="grid md:grid-cols-2 gap-8 items-center"><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">ANTES</h4><img src="https://i.imgur.com/QcMozCv.png" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero"></div><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">DESPUÉS</h4><img src="https://i.imgur.com/pveeSwL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></div></section>
-                <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><div class="card bg-slate-900/50"><h3 class="card-title"><i class="fas fa-tachometer-alt mr-2"></i>Simulador de Carga</h3><div><p class="text-gray-400 mb-6">Compare el comportamiento del tablero antiguo vs. el nuevo ante la misma demanda de carga.</p><div class="grid lg:grid-cols-2 gap-8 items-center"><div id="simulator-controls" class="space-y-4"></div><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="dashboard-display"><div class="dashboard-label">Corriente Total</div><div id="current-display" class="dashboard-value">0.0 <span class="text-lg">A</span></div></div><div class="dashboard-display"><div class="dashboard-label">Potencia Total</div><div id="power-display" class="dashboard-value">0.0 <span class="text-lg">kW</span></div></div></div><div id="old-board-status" class="bg-slate-900 p-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero ANTIGUO</h4><div class="flex items-center"><span id="old-board-indicator" class="status-indicator bg-green-400"></span><span id="old-board-text" class="font-bold">OK</span></div><p id="old-board-desc" class="text-sm text-gray-400 mt-2">Límite: 25A. El sistema opera dentro de los límites.</p></div><div id="new-board-status" class="bg-slate-900 p-4 mt-4 rounded-lg border border-slate-700 transition-all duration-300"><h4 class="font-bold text-lg mb-2 text-white">Diagnóstico Tablero NUEVO</h4><div class="flex items-center"><span id="new-board-indicator" class="status-indicator bg-green-400"></span><span id="new-board-text" class="font-bold">SEGURO</span></div><p id="new-board-desc" class="text-sm text-gray-400 mt-2">Límite: 63A. Opera con amplio margen de seguridad.</p></div></div></div></div></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Imágenes Finales y Mejoras</h4><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4"><img src="https://i.imgur.com/8QaYxTL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 1"><img src="https://i.imgur.com/gL1OOaU.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 2"><img src="https://i.imgur.com/VCOKRHd.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 3"><img src="https://i.imgur.com/fhXpf2w.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 4"><img src="https://i.imgur.com/o4D1TiA.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 5"></div></div></section>
+                <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Imágenes Finales y Mejoras</h4><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4"><img src="https://i.imgur.com/8QaYxTL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 1"><img src="https://i.imgur.com/gL1OOaU.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 2"><img src="https://i.imgur.com/VCOKRHd.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 3"><img src="https://i.imgur.com/fhXpf2w.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 4"><img src="https://i.imgur.com/o4D1TiA.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 5"></div></div></section>
                 <section data-step-id="quienes-somos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Quiénes Somos</h3><div id="team-container" class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mt-6"></div></div></section>
             </div>
         </div>
@@ -618,84 +618,6 @@
         document.getElementById('select-project-tablero').addEventListener('click', () => selectProject('tablero'));
         controls.backToMenu.addEventListener('click', backToMainMenu);
         
-        const loadsTablero = [
-            { name: 'Laboratorio de Química', power: 2.55, icon: 'fa-flask' },
-            { name: 'Laboratorio de Física', power: 2.21, icon: 'fa-atom' },
-            { name: 'Labs de Informática', power: 4.15, icon: 'fa-laptop-code' },
-            { name: 'Biblioteca', power: 1.87, icon: 'fa-book-open' },
-            { name: 'Planta Biodiesel', power: 3.52, icon: 'fa-gas-pump' },
-            { name: 'Sala Audiovisual', power: 1.48, icon: 'fa-film' }
-        ];
-        const oldBoardLimitAmps = 25; 
-        const newBoardLimitAmps = 63;
-        
-        function initializeSimulatorTablero() {
-            const controlsContainer = document.getElementById('simulator-controls');
-            
-            const controlsHTML = loadsTablero.map((load, index) => `
-                <div class="flex items-center justify-between bg-slate-900/50 p-3 rounded-lg border border-slate-700">
-                    <div class="flex items-center"><i class="fas ${load.icon} mr-4 text-primary-blue text-lg w-6 text-center"></i><span>${load.name}</span></div>
-                    <div class="relative inline-block w-14 h-7 align-middle select-none">
-                        <input type="checkbox" name="toggle-sim-${index}" id="toggle-sim-${index}" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white appearance-none cursor-pointer" data-power="${load.power}"/>
-                        <label for="toggle-sim-${index}" class="toggle-label"><span class="toggle-ball"></span></label>
-                    </div>
-                </div>`).join('');
-
-            controlsContainer.innerHTML = controlsHTML;
-
-            controlsContainer.querySelectorAll('.toggle-checkbox').forEach((checkbox) => {
-                checkbox.addEventListener('change', updateSimulatorTablero);
-            });
-
-            updateSimulatorTablero();
-        }
-
-        function updateSimulatorTablero() {
-            let totalPower = 0;
-            document.querySelectorAll('#simulator-controls .toggle-checkbox:checked').forEach(checkbox => {
-                totalPower += parseFloat(checkbox.dataset.power);
-            });
-            
-            const totalCurrent = totalPower > 0 ? (totalPower * 1000) / (380 * 1.732 * 0.9) : 0;
-            
-            document.getElementById('power-display').innerHTML = `${totalPower.toFixed(1)} <span class="text-lg">kW</span>`;
-            document.getElementById('current-display').innerHTML = `${totalCurrent.toFixed(1)} <span class="text-lg">A</span>`;
-            
-            const isOverloadOld = totalCurrent > oldBoardLimitAmps;
-            const statusUIOld = { container: document.getElementById('old-board-status'), indicator: document.getElementById('old-board-indicator'), text: document.getElementById('old-board-text'), desc: document.getElementById('old-board-desc') };
-            const statusUINew = { container: document.getElementById('new-board-status'), indicator: document.getElementById('new-board-indicator'), text: document.getElementById('new-board-text'), desc: document.getElementById('new-board-desc') };
-
-            if (isOverloadOld) {
-                updateStatusUI(statusUIOld, 'SOBRECARGA', `Demanda supera ${oldBoardLimitAmps}A. Riesgo de corte.`, 'red');
-            } else {
-                updateStatusUI(statusUIOld, 'OK', `Límite: 25A. Opera dentro de los límites.`, 'green');
-            }
-
-            if (totalCurrent > newBoardLimitAmps) {
-                 updateStatusUI(statusUINew, 'LÍMITE ALCANZADO', `Límite: ${newBoardLimitAmps}A. Las protecciones actuarían.`, 'red');
-            } else {
-                updateStatusUI(statusUINew, 'SEGURO', `Límite: 63A. Opera con amplio margen de seguridad.`, 'green');
-            }
-        }
-
-        function updateStatusUI(elements, text, desc, color) {
-            const colors = {
-                red: { bg: 'bg-red-accent', border: 'border-red-accent' },
-                green: { bg: 'bg-green-accent', border: 'border-green-accent' }
-            };
-            const otherColor = color === 'red' ? 'green' : 'red';
-            
-            elements.indicator.classList.remove(colors[otherColor].bg);
-            elements.indicator.classList.add(colors[color].bg);
-            elements.container.classList.remove(colors[otherColor].border);
-            elements.container.classList.add(colors[color].border);
-            elements.text.textContent = text;
-            elements.desc.textContent = desc;
-        }
-
-        initializeSimulatorTablero();
-        showView('main');
-        
         // --- Video Modal Logic ---
         const videoModal = document.getElementById('video-modal');
         const videoModalCloseBtn = document.getElementById('video-modal-close-btn');
@@ -819,3 +741,4 @@
     </script>
 </body>
 </html>
+
