@@ -310,8 +310,45 @@
             </section>
             <hr class="border-slate-700 my-16">
             <div class="content-container">
-                <section data-step-id="relevamiento" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-search-location mr-2"></i>Relevamiento Inicial</h3><p class="text-slate-300 mb-6">Se relevó la instalación para comprender la distribución de cargas y documentar el estado original. A continuación, se presentan imágenes del estado del tablero antes de la intervención.</p><div class="flex flex-col items-center"><h4 class="text-xl font-bold text-center mb-4 text-white">Estado del Tablero</h4><div class="grid grid-cols-2 md:grid-cols-3 gap-4"><img src="https://i.imgur.com/lYbwQYs.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 1 del Tablero Antiguo"><img src="https://i.imgur.com/rIGokiB.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 2 del Tablero Antiguo"><img src="https://i.imgur.com/iSYTPbc.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 3 del Tablero Antiguo"><img src="https://i.imgur.com/arIxff0.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 4 del Tablero Antiguo"><img src="https://i.imgur.com/PwBHkTn.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 5 del Tablero Antiguo"><img src="https://i.imgur.com/QcMozCv.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 6 del Tablero Antiguo"></div></div></div></section>
+                <section data-step-id="relevamiento" class="mb-12 content-section">
+                    <div class="card">
+                        <h3 class="card-title"><i class="fas fa-search-location mr-2"></i>Relevamiento Inicial</h3>
+                        <p class="text-slate-300 mb-6">Se relevó la instalación para comprender la distribución de cargas y documentar el estado original. A continuación, se presentan imágenes del estado del tablero antes de la intervención.</p>
+                        <div class="flex flex-col items-center">
+                            <h4 class="text-xl font-bold text-center mb-4 text-white">Estado del Tablero (Referencia)</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <img src="https://i.imgur.com/lYbwQYs.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 1 del Tablero Antiguo">
+                                <img src="https://i.imgur.com/rIGokiB.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 2 del Tablero Antiguo">
+                                <img src="https://i.imgur.com/iSYTPbc.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 3 del Tablero Antiguo">
+                                <img src="https://i.imgur.com/arIxff0.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 4 del Tablero Antiguo">
+                                <img src="https://i.imgur.com/PwBHkTn.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 5 del Tablero Antiguo">
+                                <img src="https://i.imgur.com/QcMozCv.png" class="rounded-lg shadow-lg clickable-image" data-title="Foto 6 del Tablero Antiguo">
+                            </div>
+                            
+                            <!-- Sección de Registro Inicial Real (Relevamiento) -->
+                            <h4 class="text-xl font-bold text-center mt-8 mb-4 text-primary-blue border-t border-slate-700 pt-6 w-full">Registro Fotográfico en Obra: Diagnóstico</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                                <div class="relative group">
+                                    <div class="overflow-hidden rounded-lg border border-slate-600 shadow-lg">
+                                        <img src="https://i.imgur.com/86e78TE.jpeg" class="clickable-image w-full h-64 object-cover transform hover:scale-105 transition duration-500" data-title="Relevamiento: Estado Inicial del Tablero">
+                                    </div>
+                                    <p class="text-sm font-semibold text-center mt-3 text-slate-300"><i class="fas fa-camera mr-2"></i>Estado Inicial (Cerrado)</p>
+                                    <p class="text-xs text-center text-slate-400 mt-1">Se observa el tablero antes de la intervención.</p>
+                                </div>
+                                <div class="relative group">
+                                    <div class="overflow-hidden rounded-lg border border-slate-600 shadow-lg">
+                                        <img src="https://i.imgur.com/gcwHJtQ.jpeg" class="clickable-image w-full h-64 object-cover transform hover:scale-105 transition duration-500" data-title="Relevamiento: Interior y Cableado Expuesto">
+                                    </div>
+                                    <p class="text-sm font-semibold text-center mt-3 text-slate-300"><i class="fas fa-bolt mr-2"></i>Diagnóstico Interno</p>
+                                    <p class="text-xs text-center text-slate-400 mt-1">Con protecciones retiradas: cableado interno desordenado.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <section data-step-id="organizacion" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tasks mr-2"></i>Gantt y Organización</h3><p class="text-slate-300 mb-6">La ejecución se planificó con un Diagrama de Gantt para gestionar tareas, plazos y recursos de manera eficiente.</p><img src="https://i.imgur.com/luZSocN.png" class="rounded-lg shadow-lg clickable-image w-full" data-title="Diagrama de Gantt del Proyecto"></div></section>
+                
                 <section data-step-id="planos" class="mb-12 content-section">
                     <div class="card">
                         <h3 class="card-title text-center"><i class="fas fa-drafting-compass mr-2"></i>Planos del Proyecto</h3>
@@ -323,8 +360,8 @@
                              <div class="flex justify-between items-center mb-4">
                                 <h4 class="text-xl font-bold text-white">Galería de Planos Unifilares</h4>
                                 <button id="close-unifilar-carousel" class="p-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-700 transition" title="Volver"><i class="fas fa-times text-lg"></i></button>
-                            </div>
-                           <div class="relative">
+                             </div>
+                            <div class="relative">
                                 <div class="overflow-hidden rounded-lg">
                                     <div id="unifilar-slides-container" class="flex transition-transform duration-500 ease-in-out bg-black/20">
                                         <!-- Slides will be injected here -->
@@ -336,8 +373,64 @@
                         </div>
                     </div>
                 </section>
+                
                 <section data-step-id="presupuesto" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-chart-pie mr-2"></i>Presupuesto</h3><div class="grid md:grid-cols-2 gap-8 text-center"><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-green-400">Costo de Materiales</h4><p class="text-4xl font-bold">$ 1,140,131</p></div><div class="bg-slate-900 p-6 rounded-lg"><h4 class="text-xl font-bold mb-2 text-yellow-400">Mano de Obra</h4><p class="text-4xl font-bold">$ 1,018,074</p></div></div><div class="bg-sky-900/50 border border-sky-500 p-6 rounded-lg mt-8 text-center"><h4 class="text-xl font-bold text-sky-300">Costo Total Estimado</h4><p class="text-5xl font-black text-white mt-2">$ 2,158,205</p></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Documentación de Presupuesto</h4><div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"><img src="https://i.imgur.com/yP7vX4t.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 1 (Casa A)"><img src="https://i.imgur.com/1RArqdC.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 2 (Casa B)"><img src="https://i.imgur.com/Qask1xv.png" class="rounded-lg shadow-lg clickable-image" data-title="Presupuesto 3 (Casa C)"><img src="https://i.imgur.com/3WFA2ta.png" class="rounded-lg shadow-lg clickable-image" data-title="Mano de Obra y Lista de Materiales"></div></div></section>
-                <section data-step-id="montaje" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje</h3><p class="text-slate-300 mb-6">La etapa de montaje se planificó en dos jornadas: la primera destinada al armado externo y montaje del tablero seccional, junto con la reorganización del tablero de biblioteca; y la segunda al reacondicionamiento de los tableros de laboratorio. Esta etapa se encuentra programada para realizarse próximamente, una vez recibidos los materiales correspondientes.</p><div class="grid md:grid-cols-2 gap-8 items-center"><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">ANTES</h4><img src="https://i.imgur.com/QcMozCv.png" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero"></div><div class="text-center"><h4 class="text-xl font-bold mb-4 text-white">DESPUÉS</h4><img src="https://i.imgur.com/pveeSwL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado"></div></div></div></section>
+                
+                <section data-step-id="montaje" class="mb-12 content-section">
+                    <div class="card">
+                        <h3 class="card-title"><i class="fas fa-tools mr-2"></i>Montaje y Ejecución</h3>
+                        <p class="text-slate-300 mb-6">Esta etapa refleja el trabajo de campo. Se documenta el proceso intermedio de reordenamiento y la identificación final de los conductores, logrando una mejora sustancial en la seguridad y estética.</p>
+                        
+                        <!-- Sección: Trabajo en Proceso -->
+                        <h4 class="text-xl font-bold mb-4 text-white border-l-4 border-yellow-500 pl-3">Trabajo en Proceso (Intervención)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="relative group">
+                                <img src="https://i.imgur.com/yXlCASJ.jpeg" class="rounded-lg shadow-lg clickable-image w-full h-48 object-cover border border-slate-700" data-title="Montaje: Intervención en Proceso (1)">
+                                <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">Etapa Intermedia</span>
+                            </div>
+                            <div class="relative group">
+                                <img src="https://i.imgur.com/Zpq9fr3.jpeg" class="rounded-lg shadow-lg clickable-image w-full h-48 object-cover border border-slate-700" data-title="Montaje: Intervención en Proceso (2)">
+                                <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">Etapa Intermedia</span>
+                            </div>
+                            <div class="relative group">
+                                <img src="https://i.imgur.com/rzPolU3.jpeg" class="rounded-lg shadow-lg clickable-image w-full h-48 object-cover border border-slate-700" data-title="Montaje: Intervención en Proceso (3)">
+                                <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">Etapa Intermedia</span>
+                            </div>
+                        </div>
+
+                        <!-- Sección: Resultado Parcial Ordenado -->
+                        <div class="bg-slate-900/60 p-6 rounded-xl border border-primary-blue/30 mb-8">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h4 class="text-2xl font-bold text-primary-blue mb-2">Ordenamiento e Identificación</h4>
+                                    <p class="text-slate-300 mb-4 text-sm">Estado avanzado del tablero. Se ha logrado peinar los cables, identificar los circuitos y limpiar el área de trabajo, preparándolo para el cierre final.</p>
+                                    <ul class="text-sm text-slate-400 space-y-2 mb-4">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i> Cables peinados y precintados</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i> Identificación clara de fases y neutros</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i> Limpieza de componentes</li>
+                                    </ul>
+                                </div>
+                                <div class="relative">
+                                    <img src="https://i.imgur.com/bByw20L.jpeg" class="rounded-lg shadow-2xl clickable-image w-full border-2 border-primary-blue" data-title="Avance: Tablero Ordenado e Identificado">
+                                    <div class="absolute -bottom-3 -right-3 bg-primary-blue text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">Avance Clave</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="border-slate-700 my-8">
+
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="text-center opacity-70">
+                                <h4 class="text-xl font-bold mb-4 text-white">ANTES</h4>
+                                <img src="https://i.imgur.com/QcMozCv.png" class="rounded-lg shadow-lg clickable-image" data-title="Estado Inicial del Tablero">
+                            </div>
+                            <div class="text-center">
+                                <h4 class="text-xl font-bold mb-4 text-white">DESPUÉS (Proyección)</h4>
+                                <img src="https://i.imgur.com/pveeSwL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado Final: Tablero Reformado">
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section data-step-id="conclusiones" class="mb-12 content-section"><div class="card"><h3 class="card-title"><i class="fas fa-check-circle mr-2"></i>Conclusiones y Resultados</h3><div class="prose prose-invert text-slate-300 mb-8"><p>La reforma concluye con una instalación <strong>segura, funcional y normativa</strong>, que servirá como recurso didáctico y garantizará el correcto funcionamiento de áreas vitales.</p></div><hr class="border-slate-600 my-6"><h4 class="text-xl font-bold text-center mb-4 text-white">Imágenes Finales y Mejoras</h4><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4"><img src="https://i.imgur.com/8QaYxTL.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 1"><img src="https://i.imgur.com/gL1OOaU.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 2"><img src="https://i.imgur.com/VCOKRHd.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 3"><img src="https://i.imgur.com/fhXpf2w.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 4"><img src="https://i.imgur.com/o4D1TiA.png" class="rounded-lg shadow-lg clickable-image" data-title="Resultado 5"></div></div></section>
                 <section data-step-id="quienes-somos" class="mb-12 content-section"><div class="card"><h3 class="card-title text-center"><i class="fas fa-users mr-2"></i>Quiénes Somos</h3><div id="team-container" class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mt-6"></div></div></section>
             </div>
@@ -740,5 +833,3 @@
     </script>
 </body>
 </html>
-
-
