@@ -328,7 +328,6 @@
                             <!-- Sección de Registro Inicial Real (Relevamiento) -->
                             <h4 class="text-xl font-bold text-center mt-8 mb-4 text-primary-blue border-t border-slate-700 pt-6 w-full">Registro Fotográfico en Obra: Diagnóstico</h4>
                             
-                            <!-- CAMBIO AQUÍ: Usamos flex justify-center para centrar perfectamente el único elemento -->
                             <div class="flex justify-center w-full">
                                 <div class="relative group max-w-md w-full">
                                     <div class="overflow-hidden rounded-lg border border-slate-600 shadow-lg">
@@ -379,7 +378,12 @@
                         
                         <!-- Sección: Trabajo en Proceso -->
                         <h4 class="text-xl font-bold mb-4 text-white border-l-4 border-yellow-500 pl-3">Trabajo en Proceso (Intervención)</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <!-- Nueva foto insertada aquí -->
+                            <div class="relative group">
+                                <img src="https://i.imgur.com/gcwHJtQ.jpeg" class="rounded-lg shadow-lg clickable-image w-full h-48 object-cover border border-slate-700" data-title="Diagnóstico Interno: Cableado Expuesto">
+                                <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">Inicio / Diagnóstico</span>
+                            </div>
                             <div class="relative group">
                                 <img src="https://i.imgur.com/EiU8Jpe.jpeg" class="rounded-lg shadow-lg clickable-image w-full h-48 object-cover border border-slate-700" data-title="Montaje: Intervención en Proceso (Trabajo en Tablero)">
                                 <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">Etapa Intermedia</span>
@@ -728,7 +732,7 @@
             modalVideo.src = "";
             videoModal.querySelector('.video-modal-content').classList.add('opacity-0', 'scale-95');
             videoModal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+            setTimeout(() => videoModal.classList.add('hidden'), 300);
         }
 
         document.querySelectorAll('.video-container').forEach(el => {
